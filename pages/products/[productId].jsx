@@ -3,8 +3,12 @@ import { client, urlFor } from "../../lib/client";
 import img from "../../assets/MMT73.jpg";
 import Image from "next/image";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { useStateContext } from "../../context/StateContext";
 
 const DetailPage = ({ product }) => {
+  const {onAdd, cartItems, showCart} = useStateContext()
+
+
   const [selectedColorId, setSelectedColorId] = useState(0);
   const [selectedPreviewId, setSelectedPreviewId] = useState(0);
   const [color, setColor] = useState(
@@ -57,12 +61,12 @@ const DetailPage = ({ product }) => {
                         }
                       >
                         <div className="flex h-20 w-20 flex-col items-center justify-center ">
-                          <div className="h-[95%] w-[95%] rounded-lg bg-white">
+                          <div className="h-[95%] w-[95%] rounded-lg bg-white ">
                             <img
                               className={
                                 selectedColorId == i
-                                  ? "h-[100%] w-[100%] object-contain mix-blend-multiply transition-all"
-                                  : "h-[100%] w-[100%] object-contain opacity-50 mix-blend-multiply transition-all"
+                                  ? `h-[100%] w-[100%] object-contain mix-blend-multiply transition-all`
+                                  : `h-[100%] w-[100%] object-contain opacity-50 mix-blend-multiply transition-all`
                               }
                               src={urlFor(product.allImage[0])}
                             />
@@ -76,6 +80,7 @@ const DetailPage = ({ product }) => {
               </div>
               {product.isStock ? (
                 <button
+                  onClick={()=> onAdd(product, color)}
                   type="button"
                   className="rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-105 hover:from-cyan-500 hover:to-purple-300"
                 >

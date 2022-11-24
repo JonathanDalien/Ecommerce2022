@@ -2,11 +2,15 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import DropDownMenu from "./DropDownMenu";
-
+import { useStateContext } from "../context/StateContext";
+import Cart from "./Cart";
 const Navbar = () => {
   const [showProducts, setShowProducts] = useState(false);
 
+  const {totalQty, showCart, setShowCart} = useStateContext()
+
   return (
+    <>
     <nav className="border-b-gray2-200 w-screen border-b-2  bg-slate-100 drop-shadow-md">
       <div className="flex items-center justify-between p-5">
         <Link href="/">
@@ -41,9 +45,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex space-x-6">
-          <button type="button" className="cart-icon mx-5">
+          <button type="button" className="cart-icon mx-5" onClick={()=>setShowCart(true)}>
             <AiOutlineShopping />
-            <span className="cart-item-qty">2</span>
+            <span className="cart-item-qty">{totalQty}</span>
           </button>
           <Link
             className="rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"
@@ -57,9 +61,12 @@ const Navbar = () => {
           >
             Register
           </Link>
-        </div>
+        </div>        
       </div>
+      
     </nav>
+    {showCart &&<Cart/>}
+    </>
   );
 };
 
