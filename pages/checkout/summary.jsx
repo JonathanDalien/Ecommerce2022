@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,6 +7,9 @@ import { useStateContext } from "../../context/StateContext";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { urlFor } from "../../lib/client";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { addDoc, collection, doc } from "firebase/firestore";
+import { db } from "../../lib/firebase";
+const { v4: uuidv4 } = require("uuid");
 
 const schema = yup.object().shape({
   firstName: yup.string().trim().required("Bitte gebe deine Email Adresse ein"),
@@ -33,8 +36,15 @@ const Summary = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  const { totalPrice, cartItems, user, shippingData, onRemove } =
-    useStateContext();
+  const {
+    totalPrice,
+    cartItems,
+    user,
+    shippingData,
+    onRemove,
+    setCartItems,
+    setTotalQty,
+  } = useStateContext();
 
   const handleCheckout = () => {};
 
@@ -56,15 +66,15 @@ const Summary = () => {
                 <div className=" flex max-w-[650px] flex-wrap gap-10">
                   <div className=" flex min-w-[300px] flex-col rounded-lg border-[1px] border-gray-500 p-4">
                     <p className="font-semibold">Lieferadresse</p>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.firstName}</p>
                       <p>{shippingData.lastName}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.street}</p>
                       <p>{shippingData.houseNumber}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.postalCode}</p>
                       <p>{shippingData.city}</p>
                     </div>
@@ -80,15 +90,15 @@ const Summary = () => {
                   </div>
                   <div className=" flex min-w-[300px] flex-col rounded-lg border-[1px] border-gray-500 p-4">
                     <p className="font-semibold">Rechnungsadresse</p>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.firstName}</p>
                       <p>{shippingData.lastName}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.street}</p>
                       <p>{shippingData.houseNumber}</p>
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1">
                       <p>{shippingData.postalCode}</p>
                       <p>{shippingData.city}</p>
                     </div>
@@ -160,7 +170,7 @@ const Summary = () => {
                     <div className="flex justify-between">
                       <p className="text-xl font-bold">Gesamtsumme</p>
                       <p className="text-xl font-bold">
-                        {totalPrice.toFixed(2)}
+                        {totalPrice.toFixed(2)} €
                       </p>
                     </div>
                     <p className="text-sm">inkl. MwSt.</p>
@@ -252,9 +262,33 @@ const Summary = () => {
                           const order = await actions.order.capture();
                           console.log(order);
 
-                          return actions.order.capture().then(function () {
-                            // Your code here after capture the order
-                          });
+                          const orderRef = collection(db, "orders");
+
+                          return actions.order
+                            .capture()
+                            .then(async function () {
+                              // Your code here after capture the order
+                              try {
+                                await addDoc(orderRef, {
+                                  uId: uuidv4(),
+                                  firstName: shippingData.firstName,
+                                  lastName: shippingData.lastName,
+                                  email: shippingData.email,
+                                  orderId: order.id,
+                                  items: [...cartItems],
+                                  status: order.status,
+                                  create_time: order.create_time,
+                                  address: { ...order.payer.address },
+                                  totalPrice: totalPrice,
+                                  statusCode: 0,
+                                })
+                                  .then(router.push(`/orders/${order.id}`))
+                                  .then(setCartItems([]))
+                                  .then(setTotalQty(0));
+                              } catch (error) {
+                                console.log(error);
+                              }
+                            });
                         }}
                         onCancel={() => {}}
                       />

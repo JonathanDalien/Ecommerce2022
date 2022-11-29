@@ -6,8 +6,9 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useStateContext } from "../../context/StateContext";
 
 const DetailPage = ({ product }) => {
-  const {onAdd, cartItems, showCart} = useStateContext()
+  const { onAdd, cartItems, showCart } = useStateContext();
 
+  console.log(product);
 
   const [selectedColorId, setSelectedColorId] = useState(0);
   const [selectedPreviewId, setSelectedPreviewId] = useState(0);
@@ -80,7 +81,7 @@ const DetailPage = ({ product }) => {
               </div>
               {product.isStock ? (
                 <button
-                  onClick={()=> onAdd(product, color)}
+                  onClick={() => onAdd(product, color)}
                   type="button"
                   className="rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-105 hover:from-cyan-500 hover:to-purple-300"
                 >

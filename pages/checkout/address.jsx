@@ -17,7 +17,10 @@ const schema = yup.object().shape({
     .max(5, "Muss 5 Zeichen Lang sein"),
   city: yup.string().trim().required("Bitte gebe deine Email Adresse ein"),
   street: yup.string().trim().required("Bitte gebe deine Email Adresse ein"),
-  houseNumber: yup.number().required("Bitte gebe deine Email Adresse ein"),
+  houseNumber: yup
+    .number("Bitte gebe eine Gültige Hausnummer ein")
+    .required("Bitte gebe deine deine Hausnummer ein")
+    .typeError("Bitte gebe deine Hausnummer ein"),
   email: yup
     .string()
     .trim()
@@ -211,7 +214,7 @@ const Address = () => {
                       <div className="flex justify-between">
                         <p className="text-xl font-bold">Gesamtsumme</p>
                         <p className="text-xl font-bold">
-                          {totalPrice.toFixed(2)}
+                          {totalPrice.toFixed(2)} €
                         </p>
                       </div>
                       <p className="text-sm">inkl. MwSt.</p>

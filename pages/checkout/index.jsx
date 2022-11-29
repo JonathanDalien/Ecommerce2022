@@ -75,7 +75,9 @@ const Checkout = () => {
                   <div className="my-2 h-2 self-stretch border-t-2 border-gray-500"></div>
                   <div className="flex justify-between">
                     <p className="text-xl font-bold">Gesamtsumme</p>
-                    <p className="text-xl font-bold">{totalPrice.toFixed(2)}</p>
+                    <p className="text-xl font-bold">
+                      {totalPrice.toFixed(2)} €
+                    </p>
                   </div>
                   <p className="text-sm">inkl. MwSt.</p>
                   <button
@@ -95,7 +97,7 @@ const Checkout = () => {
           <h1 className="text-8xl">{<AiOutlineShoppingCart />}</h1>
           <h1 className="py-5 text-5xl">Warenkorb</h1>
           <p className="py-1">
-            In Ihrem Warenkorb befinden sich keine Produkte.{" "}
+            In Ihrem Warenkorb befinden sich keine Produkte.
           </p>
           <p className="py-1">
             Befüllen Sie den Warenkorb mit einem unserer Angebote.
