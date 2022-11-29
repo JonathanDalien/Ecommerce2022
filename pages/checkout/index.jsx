@@ -30,7 +30,10 @@ const Checkout = () => {
               <div className="checkout-details flex flex-col gap-3">
                 {cartItems.map((item, i) => {
                   return (
-                    <div className="border-gray flex items-center gap-10 rounded-xl border-[1px] p-10">
+                    <div
+                      key={i}
+                      className="border-gray flex items-center gap-10 rounded-xl border-[1px] p-10"
+                    >
                       <div className="product_img">
                         <img
                           className="h-[150px] w-[150px] object-contain mix-blend-multiply"
