@@ -56,21 +56,36 @@ a {
 
 .cart-wrapper {
   width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   right: 0;
   top: 0;
+  opacity: 0;
   z-index: 100;
   /* will-change: transform; */
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.cart-wrapper.in.visible{
+  opacity: 1;
 }
 
 .cart-container {
   height: 100vh;
   width: 600px;
   background-color: white;
-  float: right;
+  transform: translateX(600px);
+  top: 0;
+  right: 0;
+  z-index: 101;
   padding: 40px 10px;
-  position: relative;
+  position: fixed;
+  transition: transform 0.5s;
+
+}
+
+.cart-container.in.visible{
+  transform: translateX(0);
 
 }

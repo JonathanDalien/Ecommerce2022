@@ -1,58 +1,153 @@
-import React from 'react'
-import { AiOutlineLeft } from 'react-icons/ai';
-import { useStateContext } from '../context/StateContext'
-import { urlFor } from '../lib/client';
+import React, { useState } from "react";
+import { AiOutlineLeft } from "react-icons/ai";
+import { useStateContext } from "../context/StateContext";
+import { urlFor } from "../lib/client";
+import useMountTransition from "../hooks/useMountTransition ";
+import { useRouter } from "next/router";
 
-const Cart = () => {
-    const {totalPrice, totalQty, cartItems, setShowCart} = useStateContext();
+const Cart = ({ isvisible }) => {
+  const { totalPrice, totalQty, cartItems, setShowCart, onRemove } =
+    useStateContext();
+
+  const hasTransitionedIn = useMountTransition(isvisible, 500);
+
+  const router = useRouter();
+
+  let test = cartItems[0]?.price.toString().split(".");
+
+  console.log(totalPrice);
+
+  const handleCheckout = () => {
+    router.push("/checkout");
+    setShowCart(false);
+  };
+
+  const handleOuterClick = () => {
+    if (hasTransitionedIn) {
+      setShowCart(false);
+    }
+  };
 
   return (
-    <div className="cart-wrapper">
-        <div className='cart-container'>
-        {cartItems.length < 1 && 
-        <div className=' cursor-pointer text-xl flex items-center gap-3' onClick={()=>setShowCart(false)}>
-        <AiOutlineLeft/> Dein Einkaufwagen ist leer
-    </div>}
-    {cartItems.length>0 && (<>
-    
-            <div className=' cursor-pointer text-xl pb-10 flex items-center gap-3' onClick={()=>setShowCart(false)}>
-                <AiOutlineLeft/> Dein Einkaufwagen <span className='text-red-500'>({totalQty} Produkte)</span>
-            </div>
-            <div className='bg-slate-200 p-4 rounded-lg overflow-auto max-h-[70vh]'>
-            {cartItems.map((item, index)=>{
-                return (   <div key={index} className='cartProduct flex pb-4 flex-col'>
-                <h1 className='text-xl'>{item.name}</h1>
-                <div className='h-1 border-b-2 py-1 border-black'></div>
-                <div className=' py-3 px-4 cartProductDetails flex items-center'>
-                    <div className=' mix-blend-multiply flex-[2]'>
-                        <img className='h-[100px] w-[100px] object-contain' src={urlFor(item.colorImages.filter((colorItem)=>colorItem.color === item.chosenColor)[0].allImage[0])} alt="" />
-                    </div>
-                    <div className='flex flex-col gap-2 items-start flex-[1]'>
-                        <div className='text-lg flex justify-between w-[100%]'>
-                            <p>Preis :</p> 
-                            <p>{item.price}</p>
-                        </div>
-                        <div className='text-lg flex justify-between w-[100%]'>
-                            <p>Farbe :</p> 
-                            <p>{item.chosenColor}</p>
-                        </div>
-                        <div className='text-lg flex justify-between w-[100%]'>
-                            <p>Anzahl :</p> 
-                            <p>{item.quantity}</p>
-                        </div>
-                        <button className='underline text-lg text-red-500'>Löschen</button>
-                    </div>
+    <>
+      {(isvisible || hasTransitionedIn) && (
+        <>
+          <div
+            onClick={handleOuterClick}
+            className={`cart-wrapper ${hasTransitionedIn && "in"} ${
+              isvisible && "visible"
+            }`}
+          ></div>
+        </>
+      )}
+      {(isvisible || hasTransitionedIn) && (
+        <>
+          <div
+            className={`cart-container ${hasTransitionedIn && "in"} ${
+              isvisible && "visible"
+            }`}
+          >
+            {cartItems.length < 1 && (
+              <div
+                className=" flex cursor-pointer items-center gap-3 text-xl"
+                onClick={() => setShowCart(false)}
+              >
+                <AiOutlineLeft /> Dein Einkaufwagen ist leer
+              </div>
+            )}
+            {cartItems.length > 0 && (
+              <>
+                <div
+                  className=" mb-10 flex cursor-pointer items-center gap-3 text-xl"
+                  onClick={() => setShowCart(false)}
+                >
+                  <AiOutlineLeft /> Dein Einkaufwagen{" "}
+                  <span className="text-red-500">({totalQty} Produkte)</span>
                 </div>
-            </div>              )
-            })}
-               
-            </div>
-            </>)}
-        </div>
-    </div>
-  )
-}
+                <div className="h-[70vh] overflow-auto">
+                  <div className="rounded-lg bg-slate-200 p-4">
+                    {cartItems.map((item, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="cartProduct flex flex-col pb-4"
+                        >
+                          <h1 className="text-xl">{item.name}</h1>
+                          <div className="h-1 border-b-2 border-black py-1"></div>
+                          <div className=" cartProductDetails flex items-center py-3 px-4">
+                            <div className=" flex-[2] mix-blend-multiply">
+                              <img
+                                className="h-[100px] w-[100px] object-contain"
+                                src={urlFor(
+                                  item.colorImages.filter(
+                                    (colorItem) =>
+                                      colorItem.color === item.chosenColor
+                                  )[0].allImage[0]
+                                )}
+                                alt=""
+                              />
+                            </div>
+                            <div className="flex flex-[1] flex-col items-start gap-2">
+                              <div className="flex w-[100%] justify-between text-lg italic">
+                                <p>Preis :</p>
+                                <div className="flex">
+                                  <p>{item.price.toString().split(".")[0]}</p>.
+                                  {item.price.toString().split(".")[1] ? (
+                                    <p className="text-sm">
+                                      {item.price.toString().split(".")[1]}
+                                    </p>
+                                  ) : (
+                                    <p className="text-sm">00</p>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="flex w-[100%] justify-between text-lg">
+                                <p>Farbe :</p>
+                                <p className="italic">{item.chosenColor}</p>
+                              </div>
+                              <div className="flex w-[100%] justify-between text-lg">
+                                <p>Anzahl :</p>
+                                <p className="italic">{item.quantity}</p>
+                              </div>
+                              <button
+                                onClick={() => onRemove(item)}
+                                className="text-lg text-red-500 underline"
+                              >
+                                Löschen
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className=" m-4 flex justify-between gap-3 text-xl">
+                  <h1 className="font-semibold">Gesamtpreis: </h1>
+                  <div className="total flex">
+                    <p>{totalPrice.toFixed(2)}€</p>
+                  </div>
+                </div>
+                <div className="buttons flex items-center justify-around p-4">
+                  <button
+                    onClick={handleCheckout}
+                    className="rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-[1.01] hover:from-cyan-500 hover:to-purple-300 disabled:from-cyan-500 disabled:to-purple-300"
+                  >
+                    Zum Warenkorb
+                  </button>
+                  <button className="rounded-md bg-gradient-to-r from-yellow-600 to-orange-400 p-4 px-6 font-semibold text-white transition-all hover:scale-[1.01] hover:from-yellow-500 hover:to-orange-300 disabled:from-cyan-500 disabled:to-purple-300">
+                    Paypal Express Checkout
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </>
+  );
+};
 
-export default Cart
+export default Cart;
 
 // <img src={urlFor(`${item.colorImages.filter((coloredItems)=>coloredItems.color === item.chosenColor)}`)} alt="" />

@@ -1,22 +1,30 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useStateContext } from "../context/StateContext";
+import Loading from "./Loading";
 
 const Layout = ({ children }) => {
-  return (
-    <div className="layout overflow-hidden scroll-smooth">
-      <Head>
-        <title>Store</title>
-      </Head>
-      <header>
-        <Navbar />
-      </header>
-      <main className="main-container">{children}</main>
-      <footer className="bg-gray-800 text-white">
-        <Footer />
-      </footer>
-    </div>
+  const { pageLoading } = useStateContext();
+
+  return pageLoading ? (
+    <Loading />
+  ) : (
+    <>
+      <div className="layout overflow-hidden scroll-smooth">
+        <Head>
+          <title>Store</title>
+        </Head>
+        <nav>
+          <Navbar />
+        </nav>
+        <main className="main-container">{children}</main>
+        <footer className="bg-gray-800 text-white">
+          <Footer />
+        </footer>
+      </div>
+    </>
   );
 };
 

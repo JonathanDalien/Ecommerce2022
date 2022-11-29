@@ -16,3 +16,20 @@ export const category= [
             picture: "https://png2.cleanpng.com/sh/3ed7275e76bbd7baf0af83953e5b2d09/L0KzQYm3VsExN6t7e5H0aYP2gLBuTfFxeJ1qRdNycoDydMS0iPVibKFth9Ducz3sgLn2jvUuaaF1hNc2ZXH1csbrk702amJpUdZqYUa2RIiBUb41Pmo5S6c9OUG4Qom9Vsc2PmM5SKgCLoDxd1==/kisspng-apple-airpods-headphones-iphone-apple-earbuds-5b1d9daa634781.4694354915286675624067.png"
         },
     ]
+    payer: [
+        {
+          email_address: shippingData.email,
+          name: {
+            surname: shippingData.lastName,
+            given_name: shippingData.firstName,
+          },
+          address: {
+            postal_code: shippingData.postalCode,
+            address_line_1: shippingData.street,
+            address_line_2: shippingData.houseNumber,
+            admin_area_1: shippingData.city,
+            country_code: "DE",
+          },
+          payer_id: user.uid,
+        },
+      ],

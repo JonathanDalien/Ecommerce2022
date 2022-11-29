@@ -165,7 +165,7 @@ const Trends = ({
         </div>
         <hr className="py-1" />
         <div className="flex items-center justify-between pb-4">
-          <p className="">Sortieren nach</p>
+          <p className="font-bold">Sortieren nach</p>
           <div className="flex gap-10 py-2">
             <button
               className={

@@ -132,7 +132,7 @@ export default function UnstyledMenuSimple() {
         slots={{ root: Popper, listbox: StyledListbox }}
         slotProps={{ listbox: { id: "simple-menu" } }}
       >
-        <Link href="products">
+        <Link href="/products">
           <StyledMenuItem
             className="cursor-pointer"
             onClick={createHandleMenuClick("Profile")}
@@ -141,7 +141,7 @@ export default function UnstyledMenuSimple() {
           </StyledMenuItem>
         </Link>
         <Divider sx={{ my: 0.5 }} />
-        <Link href="products?category=Kopfhörer">
+        <Link href="/products?category=Kopfhörer">
           <StyledMenuItem
             className="cursor-pointer"
             onClick={createHandleMenuClick("Profile")}
@@ -149,7 +149,7 @@ export default function UnstyledMenuSimple() {
             Kopfhörer
           </StyledMenuItem>
         </Link>
-        <Link href="products?category=Lautsprecher">
+        <Link href="/products?category=Lautsprecher">
           <StyledMenuItem
             className="cursor-pointer"
             onClick={createHandleMenuClick("Profile")}
@@ -157,7 +157,7 @@ export default function UnstyledMenuSimple() {
             Lautsprecher
           </StyledMenuItem>
         </Link>
-        <Link href="products?category=Kabellose In‑Ear">
+        <Link href="/products?category=Kabellose In‑Ear">
           <StyledMenuItem
             className="cursor-pointer"
             onClick={createHandleMenuClick("Profile")}
