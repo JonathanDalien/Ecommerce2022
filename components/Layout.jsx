@@ -8,8 +8,6 @@ import Loading from "./Loading";
 const Layout = ({ children }) => {
   const { pageLoading } = useStateContext();
 
-  console.log(pageLoading + "dd");
-
   return pageLoading ? (
     <Loading />
   ) : (

@@ -8,7 +8,7 @@ export function withPublic(Component){
         const context = useStateContext()
         const router = useRouter()
 
-        if(context.user){
+        if(!context.user?.isAnonymous){
             router.replace("/")
             return <div className="bg-slate-200 h-[calc(100vh-84px)]"></div>
         }
@@ -22,7 +22,6 @@ export function withProtectedPublic(Component){
         const context = useStateContext()
         const router = useRouter()
 
-        console.log(context.user)
         if(!context.user){
             router.replace("/")
             return <div className="bg-slate-200 h-[calc(100vh-84px)]"></div>

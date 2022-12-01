@@ -33,9 +33,11 @@ const Navbar = () => {
     setTotalQty,
     setCartItems,
     cartItems,
+    anonymousUser,
     setUser,
   } = useStateContext();
 
+  console.log(user?.isAnonymous);
   console.log(user);
 
   const handleSignOut = async () => {
@@ -116,8 +118,7 @@ const Navbar = () => {
               <AiOutlineShopping />
               <span className="cart-item-qty">{totalQty}</span>
             </button>
-
-            {user ? (
+            {!user?.isAnonymous && (
               <>
                 <Link href={`/profile`} className="p-2 text-xl">
                   <p>Profil</p>
@@ -129,7 +130,8 @@ const Navbar = () => {
                   Abmelden
                 </button>
               </>
-            ) : (
+            )}
+            {user?.isAnonymous && (
               <>
                 <Link
                   className="rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"

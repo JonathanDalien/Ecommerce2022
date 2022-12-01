@@ -3,7 +3,6 @@ import React from "react";
 import OrderItem from "./OrderItem";
 
 const ProfileInfo = ({ data }) => {
-  console.log(data);
   return (
     <div className="flex-[2]">
       <div>

@@ -1,9 +1,10 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import React from "react";
-import {onAuthStateChanged} from "firebase/auth"
+import {onAuthStateChanged, signInAnonymously} from "firebase/auth"
 import {auth, db} from "../lib/firebase"
-import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc, updateDoc, increment, deleteDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { isResSent } from "next/dist/shared/lib/utils";
 
 const { v4: uuidv4 } = require('uuid')
 
@@ -16,43 +17,74 @@ export const StateContext = ({ children }) => {
     const [totalQty, setTotalQty] = useState(0);
     const [qty, setQty] = useState(1);
     const [user, setUser] = useState(null);
+    const [anonymousUser, setAnonymousUser] = useState(null);
     const [pageLoading, setPageLoading] = useState(true);
     const [shippingData, setShippingData] = useState(null);
-    let test=[]
-    useEffect(()=>{
-       
-        onAuthStateChanged(auth, user =>{
-                setUser(user)
-                setPageLoading(false)
-        })
-    },[])
+
 
     useEffect(()=>{
-        console.log(user)
-        const getCloudItems = async()=>{
-            if(user){
-                console.log(user.uid)
-            const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
-            test = await getDocs(cartRef);
+        if(!user){
+            signInAnonymously(auth);
+
         }
-        console.log(test)
-    }
+        onAuthStateChanged(auth, user =>{
+            setUser(user)
+            setPageLoading(false)
+        })
     },[user])
 
-
-    const addCartFireBase =async(product)=>{
-        const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems")
-       
-            await addDoc(cartRef, {
-                ...product,
-              })  
+    useEffect(()=>{
+        if(user){
+            console.log(user)
+        const getCloudItems = async()=>{
+            console.log("hallo")
+            const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
+            const cart = await getDocs(cartRef)
+            setCartItems(cart.docs.map((doc)=>({...doc.data()})))
+        }
+        getCloudItems();
     }
+
+    },[user])
+
+useEffect(()=>{
+    setTotalQty(cartItems.reduce((accuulator, object)=>{
+        return accuulator + object.quantity;
+    },0))
+    let sum = 0;
+    cartItems.forEach(element=>{
+        console.log(element.totalPrice)
+        sum+=element.totalPrice})
+    setTotalPrice(sum)
+},[cartItems])
+
+    const addCartFireBase =async(product, color)=>{
+        const cartRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
+            await setDoc(cartRef, {
+                ...product, chosenColor: color, quantity: 1, totalPrice: product.price, uid: product._id+color
+              })
+    }
+console.log(totalPrice)
+    const updateCartFireBase = async(product, color)=>{
+        const productRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
+
+        await updateDoc(productRef, {
+            quantity: increment(1),
+            totalPrice: increment(product.price)
+        })
+    }
+
+
+const deleteCartFirebase = async(product)=>{
+    await deleteDoc(doc(db, "shoppingCarts", user.uid, "CartItems", product._id+product.chosenColor))
+}
 
     const onRemove = (product)=>{
         let foundProduct = cartItems.find(item=> item.uid === product.uid)
         let newCartItems = cartItems.filter(item=>item.uid !==product.uid)
-
+        deleteCartFirebase(product)
         setCartItems(newCartItems)
+
 
         setTotalPrice(prevPrice =>prevPrice - foundProduct.price*foundProduct.quantity)
         setTotalQty(prevqty=> prevqty-foundProduct.quantity)
@@ -60,23 +92,22 @@ export const StateContext = ({ children }) => {
 
     const onAdd = (product, color) => {
         const checkProductInCart = cartItems.find((item) => item._id === product._id && item.chosenColor === color);
-        setTotalPrice((prevprice) => prevprice + product.price)
         setTotalQty((prevqty) => prevqty + 1)
         if (checkProductInCart) {
             const updatedCartItems = cartItems.map((cartProduct) => {
                 if (cartProduct._id === product._id && cartProduct.chosenColor === color) return {
-                    ...cartProduct, quantity: cartProduct.quantity + 1
+                    ...cartProduct, quantity: cartProduct.quantity + 1, totalPrice: cartProduct.totalPrice +product.price
                 }
                 else {
                     return { ...cartProduct }
                 }
             })
             setCartItems(updatedCartItems)
-            
+            updateCartFireBase(product, color)
         } else {
-            addCartFireBase(product)
+            addCartFireBase(product, color)
             setCartItems((prevItems) => {
-                return [...prevItems, { ...product, quantity: 1, chosenColor: color, uid: uuidv4()}]
+                return [...prevItems, { ...product, quantity: 1, chosenColor: color, uid: product._id+color, totalPrice:product.price}]
             })
         }
 

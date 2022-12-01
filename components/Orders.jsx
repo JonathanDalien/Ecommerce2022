@@ -6,7 +6,7 @@ const Orders = ({ data }) => {
     <div className="h-[55vh] flex-[2] overflow-auto">
       <div>
         <p className="p-2 text-2xl">Deine Bestellungen</p>
-        {data ? (
+        {data?.length ? (
           <div>
             {data?.map((item) => {
               return <OrderItem orderInfo={item} />;

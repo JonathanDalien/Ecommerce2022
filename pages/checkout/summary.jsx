@@ -240,7 +240,7 @@ const Summary = () => {
                                   description: "Electronics. SE",
                                   amount: {
                                     currency_code: "EUR",
-                                    value: totalPrice,
+                                    value: totalPrice.toFixed(2),
                                   },
                                   address: {
                                     address_line_1: shippingData.street,

@@ -56,7 +56,7 @@ const Register = () => {
         email,
         password
       );
-      await addDoc(doc(db, "users", result.user.uid), {
+      await setDoc(doc(db, "users", result.user.uid), {
         uid: result.user.uid,
         name,
         email,
@@ -64,6 +64,10 @@ const Register = () => {
         createdAt: Timestamp.fromDate(new Date()),
         isAdmin: false,
       });
+      await setDoc(
+        doc(db, "shoppingCarts", result.user.uid, "totalQty", "quantity"),
+        { quantity: 0 }
+      );
       router.push("/");
     } catch (error) {
       setLoading(false);

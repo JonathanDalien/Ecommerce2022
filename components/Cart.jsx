@@ -13,10 +13,6 @@ const Cart = ({ isvisible }) => {
 
   const router = useRouter();
 
-  let test = cartItems[0]?.price.toString().split(".");
-
-  console.log(totalPrice);
-
   const handleCheckout = () => {
     router.push("/checkout");
     setShowCart(false);
