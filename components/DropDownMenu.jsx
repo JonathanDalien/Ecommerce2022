@@ -85,6 +85,7 @@ const Popper = styled(PopperUnstyled)`
 
 export default function UnstyledMenuSimple() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
   const isOpen = Boolean(anchorEl);
   const preventReopen = React.useRef(false);
 
@@ -98,12 +99,14 @@ export default function UnstyledMenuSimple() {
     if (isOpen) {
       setAnchorEl(null);
     } else {
+      setOpen(true);
       setAnchorEl(event.currentTarget);
     }
   };
 
   const close = () => {
     setAnchorEl(null);
+    setOpen(false);
   };
 
   const createHandleMenuClick = (menuItem) => {
@@ -122,7 +125,6 @@ export default function UnstyledMenuSimple() {
         className="flex items-center gap-2 p-2 text-xl"
       >
         Produkte
-        {anchorEl ? <MdKeyboardArrowDown /> : <MdKeyboardArrowUp />}
       </div>
       <MenuUnstyled
         open={isOpen}

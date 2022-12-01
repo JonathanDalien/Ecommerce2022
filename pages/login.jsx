@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import { useRouter } from "next/router";
+import { useStateContext } from "../context/StateContext";
+import { onAuthStateChanged } from "firebase/auth";
+import { withPublic } from "../route";
 
 const schema = yup.object().shape({
   email: yup
@@ -19,9 +22,12 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
+  let test = auth.currentUser;
+  console.log(test);
   const router = useRouter();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const { user } = useStateContext();
 
   const {
     register,
@@ -98,4 +104,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withPublic(Login);

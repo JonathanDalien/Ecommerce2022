@@ -146,13 +146,9 @@ export const getServerSideProps = async (context) => {
   const { orderId } = params;
 
   const orderRef = collection(db, "orders");
-
   const q = query(orderRef, where("orderId", "==", orderId));
-
   const querySnapshot = await getDocs(q);
-
   const dataArray = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
-
   const [data] = dataArray;
 
   if (!data) {

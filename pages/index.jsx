@@ -3,8 +3,11 @@ import Categories from "../components/Categories";
 import Newsletter from "../components/Newsletter";
 import Trends from "../components/Trends";
 import { client } from "../lib/client";
+import { useStateContext } from "../context/StateContext";
 
 export default function Home({ products, categories }) {
+  const { user } = useStateContext();
+  console.log(user);
   return (
     <>
       <div className="bg-slate-200">

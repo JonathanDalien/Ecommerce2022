@@ -6,6 +6,8 @@ import { StateContext } from "../context/StateContext"
 function MyApp({ Component, pageProps }) {
 
   
+
+  
   return (
     <>
       <NextNProgress height={3} />

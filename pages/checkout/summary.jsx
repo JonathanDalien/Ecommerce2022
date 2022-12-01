@@ -281,6 +281,7 @@ const Summary = () => {
                                   address: { ...order.payer.address },
                                   totalPrice: totalPrice,
                                   statusCode: 0,
+                                  userId: user.uid,
                                 })
                                   .then(router.push(`/orders/${order.id}`))
                                   .then(setCartItems([]))

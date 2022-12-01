@@ -2,7 +2,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 import React from "react";
 import {onAuthStateChanged} from "firebase/auth"
 import {auth, db} from "../lib/firebase"
-import { collection, doc, getDoc, query, setDoc, Timestamp, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 const { v4: uuidv4 } = require('uuid')
@@ -16,23 +16,35 @@ export const StateContext = ({ children }) => {
     const [totalQty, setTotalQty] = useState(0);
     const [qty, setQty] = useState(1);
     const [user, setUser] = useState(null);
-    const [pageLoading, setPageLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
     const [shippingData, setShippingData] = useState(null);
-
+    let test=[]
     useEffect(()=>{
+       
         onAuthStateChanged(auth, user =>{
                 setUser(user)
                 setPageLoading(false)
         })
     },[])
 
+    useEffect(()=>{
+        console.log(user)
+        const getCloudItems = async()=>{
+            if(user){
+                console.log(user.uid)
+            const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
+            test = await getDocs(cartRef);
+        }
+        console.log(test)
+    }
+    },[user])
+
+
     const addCartFireBase =async(product)=>{
+        const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems")
        
-            await setDoc(doc(db, "shoppingCarts", user.uid), {
-                uid: user.uid,
-                createdAt: Timestamp.fromDate(new Date()),
-                cart: "",
-                totalQty,
+            await addDoc(cartRef, {
+                ...product,
               })  
     }
 
@@ -62,6 +74,7 @@ export const StateContext = ({ children }) => {
             setCartItems(updatedCartItems)
             
         } else {
+            addCartFireBase(product)
             setCartItems((prevItems) => {
                 return [...prevItems, { ...product, quantity: 1, chosenColor: color, uid: uuidv4()}]
             })
@@ -74,10 +87,27 @@ export const StateContext = ({ children }) => {
 
     return (
         <Context.Provider value={{
-            showCart, cartItems, onAdd, setUser, totalPrice,shippingData, totalQty, qty, setShowCart, setShippingData,onRemove, user, pageLoading, setTotalQty, setCartItems
+            showCart, cartItems, onAdd, setUser,setPageLoading, totalPrice,shippingData, totalQty, qty, setShowCart, setShippingData,onRemove, user, pageLoading, setTotalQty, setCartItems
         }}>
             {children}
         </Context.Provider>
     )
 }
 export const useStateContext = () => useContext(Context)
+
+
+
+export const getServerSideProps = async (context) => {
+    const { params, res, req } = context;
+    const { productId } = params;
+    const productQuery = `*[_type=="product" && productId.current == '${productId}'][0]`;
+    const product = await client.fetch(productQuery);
+    if (!product) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: { product },
+    };
+  };

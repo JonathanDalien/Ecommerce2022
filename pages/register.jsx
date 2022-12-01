@@ -7,6 +7,8 @@ import { auth, db } from "../lib/firebase";
 import { addDoc, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { Timestamp } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { withProtectedPublic, withPublic } from "../route";
 
 const schema = yup.object().shape({
   name: yup
@@ -172,4 +174,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default withPublic(Register);

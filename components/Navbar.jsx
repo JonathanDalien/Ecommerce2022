@@ -116,13 +116,19 @@ const Navbar = () => {
               <AiOutlineShopping />
               <span className="cart-item-qty">{totalQty}</span>
             </button>
+
             {user ? (
-              <button
-                onClick={handleSignOut}
-                className=" rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"
-              >
-                Abmelden
-              </button>
+              <>
+                <Link href={`/profile`} className="p-2 text-xl">
+                  <p>Profil</p>
+                </Link>
+                <button
+                  onClick={handleSignOut}
+                  className=" rounded-md  p-2 px-3 text-xl  transition-all hover:bg-slate-200"
+                >
+                  Abmelden
+                </button>
+              </>
             ) : (
               <>
                 <Link
