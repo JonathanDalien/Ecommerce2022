@@ -22,8 +22,6 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
-  let test = auth.currentUser;
-  console.log(test);
   const router = useRouter();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);

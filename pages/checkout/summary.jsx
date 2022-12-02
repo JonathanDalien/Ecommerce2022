@@ -44,6 +44,7 @@ const Summary = () => {
     onRemove,
     setCartItems,
     setTotalQty,
+    emptyCartFireBase,
   } = useStateContext();
 
   const handleCheckout = () => {};
@@ -253,15 +254,11 @@ const Summary = () => {
                               ],
                             })
                             .then((orderId) => {
-                              console.log("orderid");
-                              console.log(orderId);
                               return orderId;
                             });
                         }}
                         onApprove={async function (data, actions) {
                           const order = await actions.order.capture();
-                          console.log(order);
-
                           const orderRef = collection(db, "orders");
 
                           return actions.order
@@ -285,7 +282,8 @@ const Summary = () => {
                                 })
                                   .then(router.push(`/orders/${order.id}`))
                                   .then(setCartItems([]))
-                                  .then(setTotalQty(0));
+                                  .then(setTotalQty(0))
+                                  .then(emptyCartFireBase());
                               } catch (error) {
                                 console.log(error);
                               }

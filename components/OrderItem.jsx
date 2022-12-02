@@ -58,7 +58,7 @@ const OrderItem = ({ orderInfo }) => {
     >
       <p>Bestellnummer #{orderInfo?.orderId}</p>
       <p>Bestellt am: {formattedDate}</p>
-      <p>Betrag: {orderInfo?.totalPrice} €</p>
+      <p>Betrag: {orderInfo?.totalPrice.toFixed(2)} €</p>
     </div>
   );
 };

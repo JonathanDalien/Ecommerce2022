@@ -30,7 +30,13 @@ const DetailPage = ({ product }) => {
       <div className="min-h-[calc(100vh-84px)] bg-slate-200">
         <div className="flex flex-col gap-20">
           <div className="flex flex-[4] items-center justify-center gap-48 p-24 pb-0">
-            <div className="picture flex h-[500px] w-[500px] items-center justify-center rounded-xl">
+            <div className=" picture relative flex h-[500px] w-[500px] items-center justify-center rounded-xl">
+              {product.isSale && (
+                <p className="absolute top-0 right-0 rounded-lg bg-gradient-to-r from-red-600 to-orange-400 p-2 text-lg font-semibold text-white ">
+                  Im Angebot
+                </p>
+              )}
+
               <img
                 className="h-[100%] w-[100%] object-contain mix-blend-multiply"
                 src={urlFor(
@@ -43,8 +49,19 @@ const DetailPage = ({ product }) => {
             <div className="details flex flex-col items-center gap-2">
               <h1 className="text-lg font-semibold">{product.brand}</h1>
               <h1 className="text-2xl font-semibold">{product.name}</h1>
-              <h1 className="my-5 text-5xl">{product.category}</h1>
-              <p className="my-1">{product.price}€</p>
+              <h1 className="my-3 text-5xl">{product.category}</h1>
+              <div>
+                {product.isSale ? (
+                  <>
+                    <p className="my-1 line-through">{product.oldPrice}€</p>
+                    <p className="my-1 text-xl font-semibold text-red-500">
+                      {product.price}€
+                    </p>
+                  </>
+                ) : (
+                  <p className="my-1">{product.price}€</p>
+                )}
+              </div>
               <p className="my-1">Free Shipping</p>
               <div className="my-2 flex gap-6">
                 {product.colorImages.map((product, i) => {

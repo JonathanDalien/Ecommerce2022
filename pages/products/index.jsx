@@ -3,12 +3,7 @@ import Product from "../../components/Product";
 import { client } from "../../lib/client";
 import { useRouter } from "next/router";
 
-const Trends = ({
-  productsAllProducts,
-  productsAllHeadphones,
-  productsAllSpeaker,
-  productsAllInEar,
-}) => {
+const Trends = ({ productsAllProducts }) => {
   const router = useRouter();
   const [currentCat, setCurrentCat] = useState(
     router.query.category || "Alle Produkte"
@@ -18,7 +13,6 @@ const Trends = ({
   const [product, setProduct] = useState();
 
   useEffect(() => {
-    console.log("jaööo");
     if (router.query.category == null) {
       setCurrentCat("Alle Produkte");
       setCatText("Alle Produkte");
@@ -212,15 +206,7 @@ const Trends = ({
         <div className="flex flex-wrap justify-center gap-14">
           {product?.map((product) => {
             return (
-              <Product
-                key={product.productId.current}
-                productId={product.productId.current}
-                text={product.name}
-                price={product.price}
-                category={product.category}
-                brand={product.brand}
-                image={product.allImage}
-              />
+              <Product key={product.productId.current} product={product} />
             );
           })}
         </div>
@@ -233,24 +219,12 @@ export default Trends;
 
 export const getServerSideProps = async () => {
   const queryAllProducts = '*[_type=="product"] | order(name asc)';
-  const queryAllHeadphones =
-    '*[_type=="product" && category == "Kopfhörer"] | order(name asc) ';
-  const queryAllSpeaker =
-    '*[_type=="product" && category == "Lautsprecher"] | order(name asc) ';
-  const queryAllInEar =
-    '*[_type=="product" && category == "Kabellose In‑Ear"] | order(name asc) ';
 
   const productsAllProducts = await client.fetch(queryAllProducts);
-  const productsAllHeadphones = await client.fetch(queryAllHeadphones);
-  const productsAllSpeaker = await client.fetch(queryAllSpeaker);
-  const productsAllInEar = await client.fetch(queryAllInEar);
 
   return {
     props: {
       productsAllProducts,
-      productsAllHeadphones,
-      productsAllSpeaker,
-      productsAllInEar,
     },
   };
 };

@@ -17,6 +17,8 @@ a {
 
 * {
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+
 }
 
 .cart-icon {
@@ -57,7 +59,7 @@ a {
 .cart-wrapper {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   right: 0;
   top: 0;
@@ -85,7 +87,45 @@ a {
 
 }
 
+.hamburger-container {
+  height: 100vh;
+  width: 600px;
+  background-color: white;
+  transform: translateX(-600px);
+  top: 0;
+  left: 0;
+  z-index: 101;
+  padding: 40px 0px;
+  position: fixed;
+  transition: transform 0.5s;
+
+}
+
 .cart-container.in.visible{
   transform: translateX(0);
 
+}
+
+.hamburger-container.in.visible{
+  transform: translateX(0);
+
+}
+
+
+@media (max-width: 1024px){
+  .hamburger-container{
+    width: 60vw;
+  }
+  .cart-container{
+    width: 60vw;
+  }
+}
+
+@media (max-width: 640px){
+  .hamburger-container{
+    width: 100vw;
+  }
+  .cart-container{
+    width: 100vw;
+  }
 }

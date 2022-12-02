@@ -8,7 +8,7 @@ export function withPublic(Component){
         const context = useStateContext()
         const router = useRouter()
 
-        if(!context.user?.isAnonymous){
+        if(context.user){
             router.replace("/")
             return <div className="bg-slate-200 h-[calc(100vh-84px)]"></div>
         }

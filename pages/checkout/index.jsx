@@ -8,8 +8,6 @@ const Checkout = () => {
   const { cartItems, totalPrice, onRemove, user } = useStateContext();
   const router = useRouter();
 
-  console.log(cartItems);
-
   const handleCheckout = () => {
     user ? router.push("checkout/address") : router.push("checkout/login");
   };

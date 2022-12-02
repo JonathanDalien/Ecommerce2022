@@ -45,7 +45,6 @@ const Address = () => {
   });
 
   const submitForm = (data) => {
-    console.log(data);
     setData(data);
     router.push("/checkout/summary");
     setShippingData(data);

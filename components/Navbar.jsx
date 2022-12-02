@@ -19,6 +19,7 @@ import {
   Timestamp,
   where,
 } from "firebase/firestore";
+import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
   const [showProducts, setShowProducts] = useState(false);
   const [dataBaseCart, setDataBaseCart] = useState([]);
@@ -35,6 +36,8 @@ const Navbar = () => {
     cartItems,
     anonymousUser,
     setUser,
+    showMenu,
+    setShowMenu,
   } = useStateContext();
 
   console.log(user?.isAnonymous);
@@ -46,42 +49,25 @@ const Navbar = () => {
     router.push("/login");
   };
 
-  // useEffect(() => {
-  //   const updateCart = async () => {
-  //     user
-  //       ? await setDoc(doc(db, "shoppingCarts", user.uid), {
-  //           uid: user.uid,
-  //           createdAt: Timestamp.fromDate(new Date()),
-  //           cart: [...cartItems],
-  //           totalQty,
-  //         })
-  //       : "";
-  //   };
-  //   updateCart();
-  // }, [cartItems]);
-
-  // useEffect(() => {
-  //   const getCart = async () => {
-  //     const docRef = doc(db, "shoppingCarts", user.uid);
-  //     const q = query(docRef,where("cart", "array-contains", {uid: "8428a950-22c6-414a-a8f3-ad8367a74ea5",})
-  //     );
-  //     const docSnap = await getDoc(q);
-
-  //     if (docSnap.exists()) {
-  //       console.log("first");
-  //     }
-  //   };
-  //   getCart();
-  // }, []);
+  const handleonClickMenu = () => {
+    setShowMenu(true);
+  };
 
   return (
     <>
       <div className="border-b-gray2-200 w-screen border-b-2  bg-slate-100 px-3 drop-shadow-md">
-        <div className="flex items-center justify-between p-5 px-10">
-          <Link href="/">
-            <h1 className=" text-3xl font-bold">Electronics.</h1>
-          </Link>
-          <div className="relative flex space-x-24">
+        <div className="flex items-center justify-between py-5 ">
+          <div className="flex items-center gap-5">
+            <div class="space-y-2 lg:hidden" onClick={() => setShowMenu(true)}>
+              <div class="h-0.5 w-8 bg-gray-600"></div>
+              <div class="h-0.5 w-8 bg-gray-600"></div>
+              <div class="h-0.5 w-8 bg-gray-600"></div>
+            </div>
+            <Link href="/">
+              <h1 className=" flex-[1] text-3xl font-bold ">Electronics.</h1>
+            </Link>
+          </div>
+          <div className="hidden flex-[2] items-center justify-center gap-12 lg:flex ">
             <Link
               className="rounded-md bg-red-500 p-2 px-3 text-xl text-white transition-all hover:bg-red-400"
               href=""
@@ -106,7 +92,7 @@ const Navbar = () => {
               className="rounded-lg p-2 px-3 text-xl hover:bg-slate-50"
               href=""
             >
-              Service
+              <p className="">Service</p>
             </Link>
           </div>
           <div className="flex space-x-6">
@@ -118,8 +104,8 @@ const Navbar = () => {
               <AiOutlineShopping />
               <span className="cart-item-qty">{totalQty}</span>
             </button>
-            {!user?.isAnonymous && (
-              <>
+            {user ? (
+              <div className="hidden items-center lg:flex">
                 <Link href={`/profile`} className="p-2 text-xl">
                   <p>Profil</p>
                 </Link>
@@ -129,10 +115,9 @@ const Navbar = () => {
                 >
                   Abmelden
                 </button>
-              </>
-            )}
-            {user?.isAnonymous && (
-              <>
+              </div>
+            ) : (
+              <div className="hidden items-center lg:flex">
                 <Link
                   className="rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"
                   href="/login"
@@ -145,12 +130,13 @@ const Navbar = () => {
                 >
                   Register
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>
       </div>
       <Cart isvisible={showCart} />
+      <HamburgerMenu isvisible={showMenu} />
     </>
   );
 };

@@ -74,8 +74,8 @@ export default {
             type: "number"
         },
         {    
-            name: "salePrice",
-            title: "Sale Price",
+            name: "oldPrice",
+            title: "Old Price",
             type: "number"
         },
         {    

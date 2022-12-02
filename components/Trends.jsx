@@ -4,22 +4,14 @@ import Product from "./Product";
 const Trends = ({ products }) => {
   return (
     <div className="container m-auto py-16">
-      <h1 className=" pb-12 text-center text-4xl font-bold ">
+      <h1 className=" pb-12 text-center text-3xl font-bold lg:text-4xl ">
         Beliebte Produkte
       </h1>
       <div className="flex flex-wrap justify-center gap-10">
         {products &&
           products.map((product) => {
             return (
-              <Product
-                key={product.productId.current}
-                productId={product.productId.current}
-                text={product.name}
-                price={product.price}
-                category={product.category}
-                brand={product.brand}
-                image={product.allImage}
-              />
+              <Product key={product.productId.current} product={product} />
             );
           })}
       </div>

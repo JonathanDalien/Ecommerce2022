@@ -5,8 +5,6 @@ import { urlFor } from "../../lib/client";
 import { db } from "../../lib/firebase";
 
 const OrderDetails = ({ data }) => {
-  console.log(data);
-
   const [orderStatus, setOrderStatus] = useState({});
 
   useEffect(() => {
@@ -15,29 +13,27 @@ const OrderDetails = ({ data }) => {
         setOrderStatus({
           desc: `Wir haben deine Bestellung erhalten, und diese befindet sich nun in Bearbeitung. Eine Bestätigungsemail wurde gesendet an  ${data.email}. Auf dieser Seite siehst du alle weiteren Updates was deine Bestellung angeht.`,
           status: "Wir haben deine Bestellung erhalten",
-          color: "grey",
         });
         break;
       case 1:
         setOrderStatus({
           desc: "Deine Bestellung wird nun vorbereitet und verpackt. Eine Sendungsnummer wird dir innerhalb der nächsten 24 Stunden an deine E-Mail gesendet. Auf dieser Seite siehst du alle weiteren Updates was deine Bestellung angeht.",
           status: "Deine Bestellung wird nun vorbereitet",
-          color: "blue",
         });
+
         break;
       case 2:
         setOrderStatus({
           desc: "Deine Bestellung wurde versendet und befindet sich nun in Zustellung. In der Regel dauert der Versand 2-3 Werktage. Eine Versandbestätigung wurde dir an deine E-Mail geschickt. Auf dieser Seite siehst du alle weitern Updates was deine Bestellung angeht.",
           status: "Deine Bestellung befindet sich in Zustellung",
-          color: "green",
         });
         break;
       case 3:
         setOrderStatus({
           desc: "Deine Bestellung wurde zugestellt! Electronics. bedankt sich herzlichst bei dir und freut sich auf deine nächste Bestellung. Bei Fragen oder Probleme schreib uns an email@support.de und wir kümmern uns schnellstmöglich um dein Anliegen.",
           status: "Du hast deine Bestellung erhalten",
-          color: "green",
         });
+        break;
     }
   }, []);
 
@@ -47,9 +43,18 @@ const OrderDetails = ({ data }) => {
         <div className="left flex flex-[1] flex-col gap-4">
           <h1 className=" my-4 text-3xl font-bold">Electronics.</h1>
           <div className="flex items-center gap-2">
-            <AiOutlineCheckCircle
-              className={`text-6xl text-${orderStatus.color}-500`}
-            />
+            {data.statusCode === 0 && (
+              <AiOutlineCheckCircle className={`text-6xl text-gray-500`} />
+            )}
+            {data.statusCode === 1 && (
+              <AiOutlineCheckCircle className={`text-6xl text-blue-500`} />
+            )}
+            {data.statusCode === 2 && (
+              <AiOutlineCheckCircle className={`text-6xl text-green-500`} />
+            )}
+            {data.statusCode === 3 && (
+              <AiOutlineCheckCircle className={`text-6xl text-green-700`} />
+            )}
             <div>
               <p className="">Bestellung #{data.orderId}</p>
               <h1 className="text-2xl font-semibold">

@@ -6,9 +6,9 @@ const Newsletter = () => {
     e.preventDefault();
   };
   return (
-    <div className="container m-auto py-16">
-      <div className="flex flex-col items-center justify-start gap-10 rounded-xl bg-slate-300 py-16">
-        <h1 className="  text-5xl font-semibold">
+    <div className="container m-auto py-16 px-4 md:px-0">
+      <div className="flex flex-col items-center gap-4 rounded-xl bg-slate-300 py-4 md:gap-10 md:py-16">
+        <h1 className=" text-2xl font-semibold md:text-4xl lg:text-5xl">
           Abonniere unseren Newsletter
         </h1>
         <div>
@@ -20,7 +20,7 @@ const Newsletter = () => {
             <input
               type="email"
               placeholder="Gib deine Email ein"
-              className="w-[600px] border-0  py-4 indent-4 focus:outline-none "
+              className="border-0 py-4  indent-4  focus:outline-none md:w-[500px] lg:w-[600px] "
             ></input>
             <button
               type="submit"

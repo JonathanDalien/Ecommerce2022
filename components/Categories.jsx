@@ -5,11 +5,11 @@ import imgHeadphone from "../assets/headphones.webp";
 
 const Categories = ({ categories }) => {
   return (
-    <div className="container m-auto py-16">
-      <h1 className=" pb-12 text-center text-4xl font-bold">
+    <div className="container m-auto py-8 md:py-10 lg:py-16">
+      <h1 className=" pb-12 text-center text-3xl font-bold lg:text-4xl">
         Kategorien durchstöbern
       </h1>
-      <div className="flex justify-center space-x-24">
+      <div className="flex justify-start gap-8 overflow-auto py-4 lg:gap-24 xl:justify-center">
         <div className="w-[200px]">
           <Link href="">
             <div className="category-card flex h-[200px] w-[200px] items-center justify-center rounded-full bg-blue-800 transition-all hover:scale-105 hover:bg-red-500">

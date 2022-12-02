@@ -12,6 +12,7 @@ const Context = createContext();
 
 export const StateContext = ({ children }) => {
     const [showCart, setShowCart] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQty, setTotalQty] = useState(0);
@@ -23,11 +24,7 @@ export const StateContext = ({ children }) => {
 
 
     useEffect(()=>{
-        if(!user){
-            signInAnonymously(auth);
-
-        }
-        onAuthStateChanged(auth, user =>{
+         onAuthStateChanged(auth, user =>{
             setUser(user)
             setPageLoading(false)
         })
@@ -35,12 +32,18 @@ export const StateContext = ({ children }) => {
 
     useEffect(()=>{
         if(user){
-            console.log(user)
         const getCloudItems = async()=>{
-            console.log("hallo")
+            const oldCart = [...cartItems]
             const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
             const cart = await getDocs(cartRef)
-            setCartItems(cart.docs.map((doc)=>({...doc.data()})))
+            const cartArray =cart.docs.map((doc)=>({...doc.data()}))
+            console.log(cartArray.length)
+            if(cartArray.length){
+                setCartItems(cart.docs.map((doc)=>({...doc.data()})))
+            }
+            if(!cartArray.length){
+            setCartItems([...oldCart])
+            cartItems.map((item)=>(addCartFireBase(item, item.chosenColor, item.totalPrice, item.quantity)))}
         }
         getCloudItems();
     }
@@ -53,36 +56,48 @@ useEffect(()=>{
     },0))
     let sum = 0;
     cartItems.forEach(element=>{
-        console.log(element.totalPrice)
         sum+=element.totalPrice})
     setTotalPrice(sum)
 },[cartItems])
 
-    const addCartFireBase =async(product, color)=>{
+const emptyCartFireBase = async()=>{
+    const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
+    const cart = await getDocs(cartRef)
+    const cartArray = cart.docs.map((doc)=>({...doc.data()}))
+
+    cartArray.map((item)=>{
+        return deleteDoc(doc(db, "shoppingCarts", user.uid, "CartItems", item._id+item.chosenColor))
+    })
+}
+
+    const addCartFireBase =async(product, color, totalprice, quantity)=>{
+        if(user){
         const cartRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
             await setDoc(cartRef, {
-                ...product, chosenColor: color, quantity: 1, totalPrice: product.price, uid: product._id+color
-              })
+                ...product, chosenColor: color, quantity: quantity || 1, totalPrice: totalprice || product.price, uid: product._id+color
+              })}
     }
-console.log(totalPrice)
+
     const updateCartFireBase = async(product, color)=>{
+        if(user){
         const productRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
 
         await updateDoc(productRef, {
             quantity: increment(1),
             totalPrice: increment(product.price)
-        })
+        })}
     }
 
 
-const deleteCartFirebase = async(product)=>{
+const deleteItemFirebase = async(product)=>{
+    if(user){
     await deleteDoc(doc(db, "shoppingCarts", user.uid, "CartItems", product._id+product.chosenColor))
-}
+}}
 
     const onRemove = (product)=>{
         let foundProduct = cartItems.find(item=> item.uid === product.uid)
         let newCartItems = cartItems.filter(item=>item.uid !==product.uid)
-        deleteCartFirebase(product)
+        deleteItemFirebase(product)
         setCartItems(newCartItems)
 
 
@@ -118,7 +133,7 @@ const deleteCartFirebase = async(product)=>{
 
     return (
         <Context.Provider value={{
-            showCart, cartItems, onAdd, setUser,setPageLoading, totalPrice,shippingData, totalQty, qty, setShowCart, setShippingData,onRemove, user, pageLoading, setTotalQty, setCartItems
+            showCart, cartItems, onAdd, setShowMenu, showMenu, emptyCartFireBase,setUser,setPageLoading, totalPrice,shippingData, totalQty, qty, setShowCart, setShippingData,onRemove, user, pageLoading, setTotalQty, setCartItems
         }}>
             {children}
         </Context.Provider>
