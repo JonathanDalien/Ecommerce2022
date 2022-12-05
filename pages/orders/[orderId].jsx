@@ -38,10 +38,12 @@ const OrderDetails = ({ data }) => {
   }, []);
 
   return (
-    <div className="h-[calc(100vh-84px)] bg-slate-100">
-      <div className="container m-auto flex gap-10 p-20">
+    <div className="min-h-[calc(100vh-84px)] bg-slate-100">
+      <div className="m-auto gap-10 p-5 md:p-10 lg:container lg:p-20">
         <div className="left flex flex-[1] flex-col gap-4">
-          <h1 className=" my-4 text-3xl font-bold">Electronics.</h1>
+          <h1 className=" my-4 hidden text-3xl font-bold md:block">
+            Electronics.
+          </h1>
           <div className="flex items-center gap-2">
             {data.statusCode === 0 && (
               <AiOutlineCheckCircle className={`text-6xl text-gray-500`} />
@@ -58,7 +60,7 @@ const OrderDetails = ({ data }) => {
             <div>
               <p className="">Bestellung #{data.orderId}</p>
               <h1 className="text-2xl font-semibold">
-                Dankeschön {data.firstName}!
+                Vielen Dank für deine Bestellung!
               </h1>
             </div>
           </div>
@@ -70,33 +72,33 @@ const OrderDetails = ({ data }) => {
           </div>
           <div className="rounded-md border-2 border-gray-200 p-4">
             <h1 className="pb-4 text-2xl font-semibold">Kundeninformation</h1>
-            <div className="grid grid-cols-2 grid-rows-2 gap-8">
-              <div>
+            <div className="grid grid-cols-1 grid-rows-1 justify-center gap-8 sm:grid-cols-2 sm:grid-rows-2">
+              <div className="flex flex-col items-center justify-center sm:block">
                 <h2 className="pb-2 text-lg font-semibold">Lieferadresse</h2>
                 <p>{`${data.firstName} ${data.lastName}`}</p>
                 <p>{`${data.address.address_line_1} ${data.address.address_line_2}`}</p>
                 <p>{`${data.address.postal_code} ${data.address.admin_area_1}`}</p>
                 <p>{data.email}</p>
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center sm:block">
                 <h2 className="pb-2 text-lg font-semibold">Rechnungsadresse</h2>
                 <p>{`${data.firstName} ${data.lastName}`}</p>
                 <p>{`${data.address.address_line_1} ${data.address.address_line_2}`}</p>
                 <p>{`${data.address.postal_code} ${data.address.admin_area_1}`}</p>
                 <p>{data.email}</p>
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center sm:block">
                 <h2 className="pb-2 text-lg font-semibold">Versandart</h2>
                 <p>Kostenloser Standardversand</p>
               </div>
-              <div>
+              <div className="flex flex-col items-center justify-center sm:block">
                 <h2 className="pb-2 text-lg font-semibold">Bezahlmethode</h2>
                 <p>Paypal</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="right flex flex-[1] flex-col rounded-md border-2 border-gray-300 p-10">
+        <div className="right my-4 flex flex-[1] flex-col rounded-md border-2 border-gray-300 p-10">
           <div className="flex h-[50vh] flex-col gap-5 overflow-auto">
             {data.items.map((item, i) => {
               return (

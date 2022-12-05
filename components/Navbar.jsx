@@ -55,24 +55,27 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="border-b-gray2-200 w-screen border-b-2  bg-slate-100 px-3 drop-shadow-md">
+      <div className="border-b-gray2-200 w-screen border-b-2 bg-slate-100 px-3 drop-shadow-md lg:px-6 ">
         <div className="flex items-center justify-between py-5 ">
-          <div className="flex items-center gap-5">
-            <div class="space-y-2 lg:hidden" onClick={() => setShowMenu(true)}>
+          <div className="flex flex-[1] items-center justify-start gap-2">
+            <div
+              class="cursor-pointer space-y-2 lg:hidden"
+              onClick={() => setShowMenu(true)}
+            >
               <div class="h-0.5 w-8 bg-gray-600"></div>
               <div class="h-0.5 w-8 bg-gray-600"></div>
               <div class="h-0.5 w-8 bg-gray-600"></div>
             </div>
             <Link href="/">
-              <h1 className=" flex-[1] text-3xl font-bold ">Electronics.</h1>
+              <h1 className=" text-3xl font-bold ">Electronics.</h1>
             </Link>
           </div>
-          <div className="hidden flex-[2] items-center justify-center gap-12 lg:flex ">
+          <div className="hidden flex-[3] items-center justify-center gap-12 lg:flex ">
             <Link
               className="rounded-md bg-red-500 p-2 px-3 text-xl text-white transition-all hover:bg-red-400"
-              href=""
+              href="/offers"
             >
-              <p>Im Angebot</p>
+              <p>Angebote</p>
             </Link>
             <Link
               href="/products"
@@ -88,22 +91,20 @@ const Navbar = () => {
             >
               <p className="">Beliebt</p>
             </Link>
-            <Link
-              className="rounded-lg p-2 px-3 text-xl hover:bg-slate-50"
-              href=""
-            >
-              <p className="">Service</p>
-            </Link>
           </div>
-          <div className="flex space-x-6">
+          <div className="flex flex-[1] justify-end gap-5">
             <button
               type="button"
-              className="cart-icon mx-5"
+              className="cart-icon hidden lg:block"
               onClick={() => setShowCart(true)}
             >
               <AiOutlineShopping />
               <span className="cart-item-qty">{totalQty}</span>
             </button>
+            <Link href="/checkout" className="cart-icon mx-5 lg:hidden">
+              <AiOutlineShopping />
+              <span className="cart-item-qty">{totalQty}</span>
+            </Link>
             {user ? (
               <div className="hidden items-center lg:flex">
                 <Link href={`/profile`} className="p-2 text-xl">
@@ -117,18 +118,18 @@ const Navbar = () => {
                 </button>
               </div>
             ) : (
-              <div className="hidden items-center lg:flex">
+              <div className="hidden items-center  lg:flex">
                 <Link
-                  className="rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"
+                  className="rounded-md  p-2 text-xl transition-all hover:bg-slate-50"
                   href="/login"
                 >
                   Login
                 </Link>
                 <Link
-                  className="rounded-md bg-blue-500 p-2 px-3 text-xl text-white transition-all hover:bg-blue-400"
+                  className="rounded-md p-2 text-xl  transition-all hover:bg-slate-50"
                   href="/register"
                 >
-                  Register
+                  Registrieren
                 </Link>
               </div>
             )}

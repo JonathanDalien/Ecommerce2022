@@ -41,15 +41,12 @@ const Footer = () => {
               </Link>
             </div>
             <div className="flex flex-col">
-              <h1 className="pb-3 text-3xl font-semibold">Support</h1>
+              <h1 className="pb-3 text-3xl font-semibold">Service</h1>
               <Link href="" className="my-3 hover:underline">
                 Angebote
               </Link>
               <Link href="#beliebt" className="my-3 hover:underline">
-                Beliebt
-              </Link>
-              <Link href="" className="my-3 hover:underline">
-                Filiale
+                Beliebte Produkte
               </Link>
             </div>
             <div className="flex flex-col">
@@ -128,7 +125,7 @@ const Footer = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="pb-3 text-2xl font-semibold md:text-3xl">
-                Support
+                Service
               </h1>
               <Link href="" className="my-3 hover:underline">
                 Angebote

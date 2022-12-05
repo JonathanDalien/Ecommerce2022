@@ -51,8 +51,8 @@ const CheckoutLogin = () => {
   return (
     <>
       {cartItems.length > 0 && (
-        <div className="flex min-h-[calc(100vh-84px)] items-center justify-center bg-slate-200 p-14">
-          <div className="registerform h-[90%] w-[40%] rounded-xl bg-white py-8 px-16">
+        <div className="flex min-h-[calc(100vh-84px)] items-center justify-center bg-slate-200 lg:p-14">
+          <div className="registerform h-[90%] w-[100%] rounded-xl bg-slate-200 py-8 lg:w-[40%] lg:bg-white lg:px-16">
             <h1 className="text-center text-3xl font-semibold">Anmelden </h1>
             {error && (
               <p className="py-4  text-center font-bold text-red-500">

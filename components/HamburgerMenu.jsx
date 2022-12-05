@@ -3,7 +3,10 @@ import { AiOutlineClose, AiOutlineLeft } from "react-icons/ai";
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
 import useMountTransition from "../hooks/useMountTransition ";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
+import Link from "next/link";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
 const HamburgerMenu = ({ isvisible }) => {
   const {
@@ -16,19 +19,20 @@ const HamburgerMenu = ({ isvisible }) => {
     setShowMenu,
   } = useStateContext();
 
-  const hasTransitionedIn = useMountTransition(isvisible, 500);
-
   const router = useRouter();
 
-  const handleCheckout = () => {
-    router.push("/checkout");
-    setShowMenu(false);
-  };
+  const hasTransitionedIn = useMountTransition(isvisible, 500);
 
   const handleOuterClick = () => {
     if (hasTransitionedIn) {
       setShowMenu(false);
     }
+  };
+
+  const handleLogOut = async () => {
+    await signOut(auth);
+    router.push("/");
+    setShowMenu(false);
   };
 
   return (
@@ -51,39 +55,63 @@ const HamburgerMenu = ({ isvisible }) => {
             }`}
           >
             <div
-              className=" mb-10 flex cursor-pointer items-center gap-3 text-xl"
+              className=" mb-5 flex cursor-pointer items-center gap-3 text-xl"
               onClick={() => setShowMenu(false)}
             >
               <AiOutlineClose /> Schließen
             </div>
             <div className="flex flex-col ">
-              <p className="border-b-2 border-black bg-slate-100 py-4 px-2  hover:bg-slate-100">
+              <Link
+                onClick={() => setShowMenu(false)}
+                href="/offers"
+                className="cursor-pointer border-b-2 border-black bg-slate-100 py-4 px-2  hover:bg-slate-200"
+              >
                 Angebote
-              </p>
-              <p className="border-b-2 border-black bg-slate-100 py-4  px-2 hover:bg-slate-100">
+              </Link>
+              <Link
+                onClick={() => setShowMenu(false)}
+                href="/products"
+                className="cursor-pointer border-b-2 border-black bg-slate-100 py-4  px-2 hover:bg-slate-200"
+              >
                 Produkte
-              </p>
-              <p className="border-b-2 border-black bg-slate-100 py-4  px-2 hover:bg-slate-100">
+              </Link>
+              <Link
+                onClick={() => setShowMenu(false)}
+                href="/#beliebt"
+                className="cursor-pointer border-b-2 border-black bg-slate-100 py-4  px-2 hover:bg-slate-200"
+              >
                 Beliebt
-              </p>
-              <p className="border-b-2 border-black bg-slate-100 py-4  px-2 hover:bg-slate-100">
-                Service
-              </p>
+              </Link>
               {!user ? (
                 <>
-                  <p className="border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-100">
+                  <Link
+                    onClick={() => setShowMenu(false)}
+                    href="/login"
+                    className="cursor-pointer border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-200"
+                  >
                     Anmelden
-                  </p>
-                  <p className="border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-100">
+                  </Link>
+                  <Link
+                    onClick={() => setShowMenu(false)}
+                    href="/register"
+                    className="cursor-pointer border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-200"
+                  >
                     Registrieren
-                  </p>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <p className="border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-100">
+                  <Link
+                    onClick={() => setShowMenu(false)}
+                    href="/profile"
+                    className="cursor-pointer border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-200"
+                  >
                     Mein Profil
-                  </p>
-                  <p className="border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-100">
+                  </Link>
+                  <p
+                    onClick={handleLogOut}
+                    className="cursor-pointer border-b-2 border-black bg-slate-100 py-4 px-2 hover:bg-slate-200"
+                  >
                     Abmelden
                   </p>
                 </>

@@ -51,39 +51,67 @@ const Profile = ({ dataArray, userLogged }) => {
   };
 
   return (
-    <div className="h-[calc(100vh-84px)] bg-slate-200">
-      <div className="container m-auto p-24">
-        <div className="py-2 text-3xl">Dein Profil</div>
+    <div className="h-[calc(100vh-84px)] bg-slate-100">
+      <div className=" m-auto p-2 md:container md:p-24">
+        <div className="py-2 text-2xl font-semibold md:text-3xl">Profil</div>
+        <div className="sm:hidden">
+          <div className=" flex gap-2 text-lg md:text-xl">
+            <p
+              onClick={() => setCurrentSetting(0)}
+              className={`${
+                currentSetting === 0 ? "bg-slate-200" : "hover:bg-slate-50"
+              } cursor-pointer rounded-md p-2 `}
+            >
+              Bestellungen
+            </p>
+            <p
+              onClick={() => setCurrentSetting(1)}
+              className={`${
+                currentSetting === 1 ? "bg-slate-200" : "hover:bg-slate-50"
+              } cursor-pointer rounded-md p-2`}
+            >
+              Informationen
+            </p>
+            <p
+              onClick={handleSignOut}
+              className={`${
+                currentSetting === 2 ? "bg-slate-200" : "hover:bg-slate-50"
+              } cursor-pointer rounded-md p-2`}
+            >
+              Abmelden
+            </p>
+          </div>
+        </div>
         <div className="my-3 h-1 w-[100%] bg-gray-400"></div>
         <div className="flex">
-          <div className="flex flex-[0.5] justify-start">
-            <div className="flex flex-col gap-2 text-xl">
+          <div className="hidden flex-[0.5] justify-start sm:flex">
+            <div className=" flex flex-col gap-2 text-lg md:text-xl">
               <p
                 onClick={() => setCurrentSetting(0)}
                 className={`${
-                  currentSetting === 0 ? "bg-slate-300" : "hover:bg-slate-100"
+                  currentSetting === 0 ? "bg-slate-200" : "hover:bg-slate-50"
                 } cursor-pointer rounded-md p-2 `}
               >
-                Deine Bestellungen
+                Bestellungen
               </p>
               <p
                 onClick={() => setCurrentSetting(1)}
                 className={`${
-                  currentSetting === 1 ? "bg-slate-300" : "hover:bg-slate-100"
+                  currentSetting === 1 ? "bg-slate-200" : "hover:bg-slate-50"
                 } cursor-pointer rounded-md p-2`}
               >
-                Account Informationen ändern
+                Informationen
               </p>
               <p
                 onClick={handleSignOut}
                 className={`${
-                  currentSetting === 2 ? "bg-slate-300" : "hover:bg-slate-100"
+                  currentSetting === 2 ? "bg-slate-200" : "hover:bg-slate-50"
                 } cursor-pointer rounded-md p-2`}
               >
                 Abmelden
               </p>
             </div>
-            <div className=" mx-5 w-1 bg-gray-400"></div>
+            <div className=" mx-5 hidden w-1 bg-gray-400 sm:block"></div>
           </div>
           {currentSetting === 0 && <Orders data={orderDataArray} />}
           {currentSetting === 1 && <ProfileInfo data={userData} />}

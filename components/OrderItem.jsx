@@ -54,7 +54,7 @@ const OrderItem = ({ orderInfo }) => {
   return (
     <div
       onClick={() => router.push(`/orders/${orderInfo.orderId}`)}
-      className="my-4 w-[100%] cursor-pointer rounded-md bg-slate-300 p-2 transition-all hover:bg-slate-100"
+      className="my-4 w-[100%] cursor-pointer rounded-md bg-slate-200 p-2 transition-all hover:bg-slate-100"
     >
       <p>Bestellnummer #{orderInfo?.orderId}</p>
       <p>Bestellt am: {formattedDate}</p>

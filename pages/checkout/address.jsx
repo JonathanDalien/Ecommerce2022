@@ -54,12 +54,12 @@ const Address = () => {
     <>
       {cartItems.length > 0 && user ? (
         <div className="min-h-[calc(100vh-84px)] bg-slate-100">
-          <div className="container m-auto p-24">
-            <h1 className="py-4 text-xl font-bold">Versanddetails</h1>
+          <div className="container m-auto p-2 md:p-24">
+            <h1 className="py-4 text-2xl font-bold">Versanddetails</h1>
             <div className="">
               <form
                 onSubmit={handleSubmit(submitForm)}
-                className="flex justify-center  gap-10 py-10"
+                className="flex-col justify-center  gap-10 py-10"
                 action=""
               >
                 <div className="flex w-[100%] flex-col">
@@ -197,7 +197,7 @@ const Address = () => {
                   />
                 </div>
                 <div>
-                  <div className="summary min-w-[500px] ">
+                  <div className="summary sm:min-w-[500px] ">
                     <div className="border-gray flex  flex-col  gap-1 rounded-xl border-[1px] p-10">
                       <p className="text-xl font-bold">Zusammenfassung</p>
                       <div className="my-2 h-2 self-stretch border-t-2 border-gray-500"></div>

@@ -95,7 +95,7 @@ a {
   top: 0;
   left: 0;
   z-index: 101;
-  padding: 40px 0px;
+  padding: 25px 0px;
   position: fixed;
   transition: transform 0.5s;
 
@@ -110,6 +110,7 @@ a {
   transform: translateX(0);
 
 }
+
 
 
 @media (max-width: 1024px){

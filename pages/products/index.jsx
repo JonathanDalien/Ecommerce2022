@@ -3,7 +3,7 @@ import Product from "../../components/Product";
 import { client } from "../../lib/client";
 import { useRouter } from "next/router";
 
-const Trends = ({ productsAllProducts }) => {
+const Products = ({ productsAllProducts }) => {
   const router = useRouter();
   const [currentCat, setCurrentCat] = useState(
     router.query.category || "Alle Produkte"
@@ -111,10 +111,10 @@ const Trends = ({ productsAllProducts }) => {
   console.log(currentCat);
   return (
     <div className="min-h-[calc(100vh-84px)] bg-slate-100 p-8">
-      <div className="container m-auto py-16">
-        <div className="flex items-center justify-between">
+      <div className="container m-auto p-2 lg:py-16">
+        <div className="flex flex-col items-center justify-between py-2 lg:flex-row">
           <h1 className="py-4 text-4xl font-bold ">{CatText}</h1>
-          <div className="flex gap-10">
+          <div className="flex gap-2">
             <button
               className={
                 currentCat == "Alle Produkte"
@@ -158,7 +158,7 @@ const Trends = ({ productsAllProducts }) => {
           </div>
         </div>
         <hr className="py-1" />
-        <div className="flex items-center justify-between pb-4">
+        <div className="flex flex-col items-center justify-between pb-4 lg:flex-row">
           <p className="font-bold">Sortieren nach</p>
           <div className="flex gap-10 py-2">
             <button
@@ -215,7 +215,7 @@ const Trends = ({ productsAllProducts }) => {
   );
 };
 
-export default Trends;
+export default Products;
 
 export const getServerSideProps = async () => {
   const queryAllProducts = '*[_type=="product"] | order(name asc)';

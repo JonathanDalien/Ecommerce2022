@@ -24,7 +24,7 @@ const Checkout = () => {
                 : `${cartItems.length} Produkte`}
             </h3>
 
-            <div className="flex items-start justify-center gap-10">
+            <div className="flex flex-col-reverse items-center justify-center gap-10 lg:flex-row lg:items-start">
               <div className="checkout-details flex flex-col gap-3">
                 {cartItems.map((item, i) => {
                   return (
@@ -32,7 +32,10 @@ const Checkout = () => {
                       key={i}
                       className="border-gray flex items-center gap-10 rounded-xl border-[1px] p-10"
                     >
-                      <div className="product_img">
+                      <div className="product_img relative">
+                        <p className="absolute -top-6 right-0 rounded-lg border-2 border-black py-1 px-2 ">
+                          {item.quantity}
+                        </p>
                         <img
                           className="h-[150px] w-[150px] object-contain mix-blend-multiply"
                           src={urlFor(
@@ -61,7 +64,7 @@ const Checkout = () => {
                   );
                 })}
               </div>
-              <div className="summary min-w-[500px] ">
+              <div className="summary min-w-[400px] lg:min-w-[500px] ">
                 <div className="border-gray flex  flex-col  gap-1 rounded-xl border-[1px] p-10">
                   <p className="text-xl font-bold">Zusammenfassung</p>
                   <div className="my-2 h-2 self-stretch border-t-2 border-gray-500"></div>

@@ -45,6 +45,7 @@ const Summary = () => {
     setCartItems,
     setTotalQty,
     emptyCartFireBase,
+    totalQty,
   } = useStateContext();
 
   const handleCheckout = () => {};
@@ -62,10 +63,10 @@ const Summary = () => {
         <div className="min-h-[calc(100vh-84px)] bg-slate-100">
           <div className="container m-auto p-10">
             <h1 className="pb-10 text-center text-3xl font-bold">Übersicht</h1>
-            <div className="flex justify-center gap-10">
-              <div className="left flex flex-col gap-10">
-                <div className=" flex max-w-[650px] flex-wrap gap-10">
-                  <div className=" flex min-w-[300px] flex-col rounded-lg border-[1px] border-gray-500 p-4">
+            <div className="flex flex-col-reverse justify-center gap-10 lg:flex-row">
+              <div className="left flex flex-col  gap-10">
+                <div className=" flex max-w-[650px] flex-wrap items-center justify-center gap-10 xl:items-start xl:justify-start">
+                  <div className=" flex min-w-[300px] flex-col items-center justify-center rounded-lg  border-[1px] border-gray-500 p-4 xl:items-start xl:justify-start">
                     <p className="font-semibold">Lieferadresse</p>
                     <div className="flex gap-1">
                       <p>{shippingData.firstName}</p>
@@ -80,7 +81,7 @@ const Summary = () => {
                       <p>{shippingData.city}</p>
                     </div>
                     <p>{shippingData.email}</p>
-                    <div className="self-start">
+                    <div className="xl:self-start">
                       <p
                         onClick={() => router.push("/checkout/address")}
                         className=" cursor-pointer py-1 underline"
@@ -89,7 +90,7 @@ const Summary = () => {
                       </p>
                     </div>
                   </div>
-                  <div className=" flex min-w-[300px] flex-col rounded-lg border-[1px] border-gray-500 p-4">
+                  <div className=" flex min-w-[300px] flex-col items-center justify-center rounded-lg border-[1px] border-gray-500 p-4 xl:items-start xl:justify-start">
                     <p className="font-semibold">Rechnungsadresse</p>
                     <div className="flex gap-1">
                       <p>{shippingData.firstName}</p>
@@ -104,7 +105,7 @@ const Summary = () => {
                       <p>{shippingData.city}</p>
                     </div>
                     <p>{shippingData.email}</p>
-                    <div className="self-start">
+                    <div className="xl:self-start">
                       <p
                         onClick={() => router.push("/checkout/address")}
                         className=" cursor-pointer py-1 underline"
@@ -113,7 +114,7 @@ const Summary = () => {
                       </p>
                     </div>
                   </div>
-                  <div className=" min-w-[300px] rounded-lg border-[1px] border-gray-500 p-4">
+                  <div className=" flex min-w-[300px] flex-col items-center justify-center rounded-lg border-[1px] border-gray-500 p-4 xl:items-start xl:justify-start">
                     <p className="font-semibold">Bezahlung</p>
                     <p>Paypal</p>
                   </div>
@@ -155,10 +156,16 @@ const Summary = () => {
                 </div>
               </div>
               <div>
-                <div className="summary min-w-[500px] ">
-                  <div className="border-gray flex  flex-col  gap-1 rounded-xl border-[1px] p-10">
+                <div className="summary md:min-w-[500px] ">
+                  <div className="border-gray flex  flex-col  gap-1 rounded-xl border-[1px] p-2 md:p-10">
                     <p className="text-xl font-bold">Zusammenfassung</p>
                     <div className="my-2 h-2 self-stretch border-t-2 border-gray-500"></div>
+                    <p className="text-gray-500 md:hidden">
+                      {totalQty === 1
+                        ? `${totalQty} Produkt`
+                        : `${totalQty} Produkte`}{" "}
+                      (Siehe unten)
+                    </p>
                     <div className="flex justify-between">
                       <p>Zwischensumme</p>
                       <p>{totalPrice.toFixed(2)} €</p>

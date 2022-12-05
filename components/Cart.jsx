@@ -57,10 +57,10 @@ const Cart = ({ isvisible }) => {
                   className=" mb-10 flex cursor-pointer items-center gap-3 text-xl"
                   onClick={() => setShowCart(false)}
                 >
-                  <AiOutlineLeft /> Dein Einkaufwagen{" "}
+                  <AiOutlineLeft /> Dein Einkaufwagen
                   <span className="text-red-500">({totalQty} Produkte)</span>
                 </div>
-                <div className="h-[70vh] overflow-auto">
+                <div className=" h-[50vh] overflow-auto lg:h-[70vh]">
                   <div className="rounded-lg bg-slate-200 p-4">
                     {cartItems.map((item, index) => {
                       return (
@@ -68,12 +68,12 @@ const Cart = ({ isvisible }) => {
                           key={index}
                           className="cartProduct flex flex-col pb-4"
                         >
-                          <h1 className="text-xl">{item.name}</h1>
+                          <h1 className="text-lg lg:text-xl">{item.name}</h1>
                           <div className="h-1 border-b-2 border-black py-1"></div>
-                          <div className=" cartProductDetails flex items-center py-3 px-4">
+                          <div className=" cartProductDetails flex items-center py-1 px-2 lg:py-3">
                             <div className=" flex-[2] mix-blend-multiply">
                               <img
-                                className="h-[100px] w-[100px] object-contain"
+                                className="h-[80px] w-[80px] object-contain lg:h-[100px] lg:w-[100px]"
                                 src={urlFor(
                                   item.colorImages.filter(
                                     (colorItem) =>

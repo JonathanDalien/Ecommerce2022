@@ -7,6 +7,10 @@ import { useStateContext } from "../context/StateContext";
 
 export default function Home({ products, categories, productsOffer }) {
   const { user } = useStateContext();
+
+  console.log(productsOffer);
+
+  console.log(user);
   return (
     <>
       <div className="bg-slate-200">
@@ -30,6 +34,7 @@ export const getServerSideProps = async () => {
   const catQuery = '*[_type=="categories"]';
   const offerQuery = '*[_type=="product"&& isSale == true][0]';
   const productsOffer = await client.fetch(offerQuery);
+  console.log(productsOffer);
   const categories = await client.fetch(catQuery);
   const products = await client.fetch(query);
   return {

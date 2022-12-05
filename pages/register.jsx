@@ -11,10 +11,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { withProtectedPublic, withPublic } from "../route";
 
 const schema = yup.object().shape({
-  name: yup
-    .string()
-    .trim()
-    .required("Bite gebe deinen Vollständigen Namen ein"),
+  firstName: yup.string().trim().required("Bite gebe deinen Vornamen ein"),
+  lastName: yup.string().trim().required("Bite gebe deinen Nachnamen ein"),
   email: yup
     .string()
     .email("Bitte gebe eine gültige Email Adresse ein")
@@ -26,7 +24,7 @@ const schema = yup.object().shape({
     .integer("Deine Telefonnumer muss gültig sein")
     .required("Bitte gebe deine Telefonnummer ein"),
   password: yup
-    .string("sdasda")
+    .string()
     .min(6, "Dein Passwort muss mindestens 6 Zeichen beinhalten")
     .typeError("Dein Passwort muss mindestens 6 Zeichen beinhalten")
     .required("Bitte gebe ein gültiges Passwort ein"),
@@ -48,7 +46,7 @@ const Register = () => {
   });
 
   const submitForm = async (data) => {
-    const { name, email, password, phoneNumber } = data;
+    const { firstName, lastName, email, password, phoneNumber } = data;
     try {
       setLoading(true);
       const result = await createUserWithEmailAndPassword(
@@ -58,7 +56,8 @@ const Register = () => {
       );
       await setDoc(doc(db, "users", result.user.uid), {
         uid: result.user.uid,
-        name,
+        firstName,
+        lastName,
         email,
         phoneNumber,
         createdAt: Timestamp.fromDate(new Date()),
@@ -77,28 +76,45 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-84px)] items-center justify-center bg-slate-200 p-14">
-      <div className="registerform h-[90%] w-[40%] rounded-xl bg-white py-8 px-16">
+    <div className="w flex min-h-[calc(100vh-86x)] items-center justify-center bg-slate-200 lg:min-h-[calc(100vh-84px)] lg:p-10 xl:p-14">
+      <div className="registerform rounded-xl bg-slate-200 py-8 md:w-[80%] lg:w-[60%] lg:bg-white lg:px-16 xl:w-[60%] 2xl:w-[40%]">
         <h1 className="pb-8 text-center text-3xl font-semibold">
           Account erstellen
         </h1>
         <form
           onSubmit={handleSubmit(submitForm)}
-          className=" flex flex-col gap-5"
+          className=" flex flex-col gap-2"
           action=""
         >
-          <p className="font-semibold text-red-500">{errors?.name?.message}</p>
+          <p className="font-semibold text-red-500">
+            {errors?.firstName?.message}
+          </p>
           <input
             className={`rounded-lg ${
-              errors?.name
+              errors?.firstName
                 ? "border-2 border-red-500"
                 : "border-2 border-gray-500"
             } py-4 px-3`}
             type="text"
-            name="name"
-            id="name"
-            placeholder="Dein Name"
-            {...register("name")}
+            name="firstName"
+            id="firstName"
+            placeholder="Dein Vorname"
+            {...register("firstName")}
+          />
+          <p className="font-semibold text-red-500">
+            {errors?.lastName?.message}
+          </p>
+          <input
+            className={`rounded-lg ${
+              errors?.lastName
+                ? "border-2 border-red-500"
+                : "border-2 border-gray-500"
+            } py-4 px-3`}
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Dein Nachname"
+            {...register("lastName")}
           />
           <p className="font-semibold text-red-500">{errors?.email?.message}</p>
           <input

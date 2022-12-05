@@ -5,6 +5,7 @@ import {auth, db} from "../lib/firebase"
 import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc, updateDoc, increment, deleteDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { isResSent } from "next/dist/shared/lib/utils";
+import toast from "react-hot-toast";
 
 const { v4: uuidv4 } = require('uuid')
 
@@ -64,7 +65,6 @@ const emptyCartFireBase = async()=>{
     const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
     const cart = await getDocs(cartRef)
     const cartArray = cart.docs.map((doc)=>({...doc.data()}))
-
     cartArray.map((item)=>{
         return deleteDoc(doc(db, "shoppingCarts", user.uid, "CartItems", item._id+item.chosenColor))
     })
@@ -107,7 +107,8 @@ const deleteItemFirebase = async(product)=>{
 
     const onAdd = (product, color) => {
         const checkProductInCart = cartItems.find((item) => item._id === product._id && item.chosenColor === color);
-        setTotalQty((prevqty) => prevqty + 1)
+        setTotalQty((prevqty) => prevqty + 1);
+        toast.success("Produkt wurde deinem Einkaufswagen hinzugefügt!")
         if (checkProductInCart) {
             const updatedCartItems = cartItems.map((cartProduct) => {
                 if (cartProduct._id === product._id && cartProduct.chosenColor === color) return {

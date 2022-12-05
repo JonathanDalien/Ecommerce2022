@@ -6,22 +6,21 @@ const ProfileInfo = ({ data }) => {
   return (
     <div className="flex-[2]">
       <div>
-        <p className="p-2 pb-8 text-2xl">Dein Account</p>
-        <div className="flex flex-col gap-2">
-          <div className="flex text-xl">
-            <p className="flex-[1]">Dein Name:</p>
-            <p className="flex-[2]">{data?.name}</p>
+        <div className="sm:0 flex flex-col gap-2 p-5">
+          <div className="flex flex-col text-xl lg:flex-row">
+            <p className="flex-[1] font-semibold">Dein Name:</p>
+            <p className="flex-[2]">{`${data.firstName} ${data.lastName}`}</p>
           </div>
-          <div className="flex text-xl">
-            <p className="flex-[1]">Deine E-Mail:</p>
+          <div className="flex flex-col text-xl lg:flex-row">
+            <p className="flex-[1] font-semibold">Deine E-Mail:</p>
             <p className="flex-[2]">{data?.email}</p>
           </div>
-          <div className="flex text-xl">
-            <p className="flex-[1]">Deine Telefonnummer:</p>
+          <div className="flex flex-col text-xl lg:flex-row">
+            <p className="flex-[1] font-semibold">Deine Telefonnummer:</p>
             <p className="flex-[2]">{data?.phoneNumber}</p>
           </div>
-          <div className="flex text-xl">
-            <p className="flex-[1]">Passwort ändern:</p>
+          <div className="flex flex-col text-xl lg:flex-row">
+            <p className="flex-[1] font-semibold">Passwort ändern:</p>
             <Link href="/changePassword" className="flex-[2] underline">
               Klicke Hier
             </Link>

@@ -38,7 +38,7 @@ const UpperBanner = ({ bannerData }) => {
         <div className="my-4 flex items-center">
           <div className="relative flex flex-col items-center justify-center">
             <img
-              src={urlFor(bannerData.allImage[1])}
+              src={urlFor(bannerData.allImage[0])}
               className=" h-[200px] w-[200px] object-contain mix-blend-multiply sm:h-[200px] sm:w-[200px] md:h-[300px] md:w-[300px] lg:h-[400px] lg:w-[400px]"
               alt=""
             />

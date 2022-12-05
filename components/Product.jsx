@@ -9,11 +9,11 @@ const Product = ({ product }) => {
   return (
     <Link href={`products/${product.productId.current}`}>
       <div className=" flex h-[350px] w-[300px] flex-col rounded-3xl bg-slate-300 px-6 py-5 transition-all hover:scale-[1.02]">
-        <div className="picture h-[100%] w-[100%] flex-[1] items-center self-center">
-          <div className="flex items-center justify-center">
+        <div className="picture relative h-[100%] w-[100%] flex-[1] items-center self-center">
+          <div className=" flex items-center justify-center">
             <img
               src={product.allImage ? urlFor(product.allImage[0]) : ""}
-              className=" max-h-[150px] self-center rounded-lg object-cover mix-blend-multiply"
+              className=" absolute top-0 right-0 left-0 bottom-0 m-auto max-h-[150px] self-center rounded-lg object-cover mix-blend-multiply"
             />
           </div>
         </div>
