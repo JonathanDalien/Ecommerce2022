@@ -17,6 +17,7 @@
         "react"
     ],
     "rules": {
-        "quotes": [2, "single", { "avoidEscape": true }]
+        "quotes": [2, "double", { "avoidEscape": true }],
+        "semi": [1, "always"]
     }
 }
