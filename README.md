@@ -4,7 +4,7 @@ For the backend I used Sanity, mainly to store all the products that are avaiabl
 Register & Login functionality was managed with help of Firebase.
 Orders, Users, and Shopping carts are stored on Firebase.
 
-### [Click here for preview](https://ecommerceheadphones.vercel.app/)
+### [Click here for preview](https://electronicsecommerce.vercel.app/))
 
 **This Page is only for showcase & and not a real app!**
 
