@@ -8,7 +8,7 @@ Orders, Users, and Shopping carts are stored on Firebase.
 
 **This Page is only for showcase & and not a real app!**
 
-![store-pic](https://i.imgur.com/1Tf3MO9.jpg)
+![store-pic](https://i.imgur.com/hf0PvSC.jpg)
 
 ### Features
 
