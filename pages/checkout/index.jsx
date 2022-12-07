@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -14,6 +15,9 @@ const Checkout = () => {
 
   return (
     <>
+      <Head>
+        <title>Warenkorb</title>
+      </Head>
       {cartItems.length > 0 && (
         <div className="min-h-[calc(100vh-84px)] bg-slate-100">
           <div className="checkout_container container m-auto p-10">

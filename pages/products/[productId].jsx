@@ -6,6 +6,7 @@ import "swiper/css";
 import { EffectFade, Pagination } from "swiper";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
+import Head from "next/head";
 
 const DetailPage = ({ product }) => {
   const { onAdd, cartItems, showCart } = useStateContext();
@@ -28,6 +29,9 @@ const DetailPage = ({ product }) => {
 
   return (
     <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
       <div className="min-h-[calc(100vh-86px)] bg-slate-200">
         <div className="flex flex-col lg:gap-10">
           <div className="flex flex-col items-center justify-around p-10 lg:flex-row lg:p-24">

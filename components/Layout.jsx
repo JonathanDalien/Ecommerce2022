@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
     <>
       <div className="layout overflow-hidden scroll-smooth">
         <Head>
-          <title>Store</title>
+          <title>Electronics.</title>
         </Head>
         <nav>
           <Navbar />

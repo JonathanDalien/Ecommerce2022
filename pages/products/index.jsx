@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Product from "../../components/Product";
 import { client } from "../../lib/client";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Products = ({ productsAllProducts }) => {
   const router = useRouter();
@@ -109,108 +110,113 @@ const Products = ({ productsAllProducts }) => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-84px)] bg-slate-100 md:p-8">
-      <div className="container m-auto md:p-2 lg:py-16">
-        <div className="flex flex-col items-center justify-between py-2 lg:flex-row">
-          <h1 className="py-4 text-4xl font-bold ">{CatText}</h1>
-          <div className="flex gap-2">
-            <button
-              className={
-                currentCat == "Alle Produkte"
-                  ? "rounded-lg bg-slate-200 p-2"
-                  : "p-2"
-              }
-              onClick={handleAll}
-            >
-              Alle Produkte
-            </button>
-            <button
-              className={
-                currentCat == "Kopfhörer"
-                  ? "rounded-lg bg-slate-200 p-2"
-                  : "p-2"
-              }
-              onClick={handleHeadphones}
-            >
-              Kopfhörer
-            </button>
-            <button
-              className={
-                currentCat == "Lautsprecher"
-                  ? "rounded-lg bg-slate-200 p-2"
-                  : "p-2"
-              }
-              onClick={handleSpeakers}
-            >
-              Lautsprecher
-            </button>
-            <button
-              className={
-                currentCat == "Kabellose In‑Ear"
-                  ? "rounded-lg bg-slate-200 p-2"
-                  : "p-2"
-              }
-              onClick={handleInEar}
-            >
-              Kabellose In-Ear
-            </button>
+    <>
+      <Head>
+        <title>Produkte</title>
+      </Head>
+      <div className="min-h-[calc(100vh-84px)] bg-slate-100 md:p-8">
+        <div className="container m-auto md:p-2 lg:py-16">
+          <div className="flex flex-col items-center justify-between py-2 lg:flex-row">
+            <h1 className="py-4 text-4xl font-bold ">{CatText}</h1>
+            <div className="flex gap-2">
+              <button
+                className={
+                  currentCat == "Alle Produkte"
+                    ? "rounded-lg bg-slate-200 p-2"
+                    : "p-2"
+                }
+                onClick={handleAll}
+              >
+                Alle Produkte
+              </button>
+              <button
+                className={
+                  currentCat == "Kopfhörer"
+                    ? "rounded-lg bg-slate-200 p-2"
+                    : "p-2"
+                }
+                onClick={handleHeadphones}
+              >
+                Kopfhörer
+              </button>
+              <button
+                className={
+                  currentCat == "Lautsprecher"
+                    ? "rounded-lg bg-slate-200 p-2"
+                    : "p-2"
+                }
+                onClick={handleSpeakers}
+              >
+                Lautsprecher
+              </button>
+              <button
+                className={
+                  currentCat == "Kabellose In‑Ear"
+                    ? "rounded-lg bg-slate-200 p-2"
+                    : "p-2"
+                }
+                onClick={handleInEar}
+              >
+                Kabellose In-Ear
+              </button>
+            </div>
           </div>
-        </div>
-        <hr className="py-1" />
-        <div className="flex flex-col items-center justify-between pb-4 lg:flex-row">
-          <p className="font-bold">Sortieren nach</p>
-          <div className="flex gap-10 py-2">
-            <button
-              className={
-                sort == "alphAsc"
-                  ? "rounded-lg bg-slate-200 p-2 text-sm"
-                  : "p-2 text-sm "
-              }
-              onClick={() => handleSort("alphAsc")}
-            >
-              Alph. aufst.
-            </button>
-            <button
-              className={
-                sort == "alphDesc"
-                  ? "rounded-lg bg-slate-200 p-2 text-sm"
-                  : " p-2  text-sm"
-              }
-              onClick={() => handleSort("alphDesc")}
-            >
-              Alph. abst.
-            </button>
-            <button
-              className={
-                sort == "priceAsc"
-                  ? "rounded-lg bg-slate-200 p-2 text-sm"
-                  : "p-2 text-sm"
-              }
-              onClick={() => handleSort("priceAsc")}
-            >
-              Preis aufst.
-            </button>
-            <button
-              className={
-                sort == "priceDesc"
-                  ? "rounded-lg bg-slate-200 p-2 text-sm"
-                  : "p-2 text-sm"
-              }
-              onClick={() => handleSort("priceDesc")}
-            >
-              Preis abst.
-            </button>
+          <hr className="py-1" />
+          <div className="flex flex-col items-center justify-between pb-4 lg:flex-row">
+            <p className="font-bold">Sortieren nach</p>
+            <div className="flex gap-10 py-2">
+              <button
+                className={
+                  sort == "alphAsc"
+                    ? "rounded-lg bg-slate-200 p-2 text-sm"
+                    : "p-2 text-sm "
+                }
+                onClick={() => handleSort("alphAsc")}
+              >
+                Alph. aufst.
+              </button>
+              <button
+                className={
+                  sort == "alphDesc"
+                    ? "rounded-lg bg-slate-200 p-2 text-sm"
+                    : " p-2  text-sm"
+                }
+                onClick={() => handleSort("alphDesc")}
+              >
+                Alph. abst.
+              </button>
+              <button
+                className={
+                  sort == "priceAsc"
+                    ? "rounded-lg bg-slate-200 p-2 text-sm"
+                    : "p-2 text-sm"
+                }
+                onClick={() => handleSort("priceAsc")}
+              >
+                Preis aufst.
+              </button>
+              <button
+                className={
+                  sort == "priceDesc"
+                    ? "rounded-lg bg-slate-200 p-2 text-sm"
+                    : "p-2 text-sm"
+                }
+                onClick={() => handleSort("priceDesc")}
+              >
+                Preis abst.
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-wrap justify-center gap-2 md:gap-14">
-          {product?.map((product) => {
-            return (
-              <Product key={product.productId.current} product={product} />
-            );
-          })}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-14">
+            {product?.map((product) => {
+              return (
+                <Product key={product.productId.current} product={product} />
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

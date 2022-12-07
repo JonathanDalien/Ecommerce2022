@@ -7,6 +7,7 @@ import ProfileInfo from "../../components/ProfileInfo";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import { protectedProfile, withProtectedPublic } from "../../route";
+import Head from "next/head";
 
 const Profile = ({ dataArray, userLogged }) => {
   const router = useRouter();
@@ -48,41 +49,15 @@ const Profile = ({ dataArray, userLogged }) => {
   };
 
   return (
-    <div className="h-[calc(100vh-84px)] bg-slate-100">
-      <div className=" m-auto p-2 md:container md:p-24">
-        <div className="py-2 text-2xl font-semibold md:text-3xl">Profil</div>
-        <div className="sm:hidden">
-          <div className=" flex gap-2 text-lg md:text-xl">
-            <p
-              onClick={() => setCurrentSetting(0)}
-              className={`${
-                currentSetting === 0 ? "bg-slate-200" : "hover:bg-slate-50"
-              } cursor-pointer rounded-md p-2 `}
-            >
-              Bestellungen
-            </p>
-            <p
-              onClick={() => setCurrentSetting(1)}
-              className={`${
-                currentSetting === 1 ? "bg-slate-200" : "hover:bg-slate-50"
-              } cursor-pointer rounded-md p-2`}
-            >
-              Informationen
-            </p>
-            <p
-              onClick={handleSignOut}
-              className={`${
-                currentSetting === 2 ? "bg-slate-200" : "hover:bg-slate-50"
-              } cursor-pointer rounded-md p-2`}
-            >
-              Abmelden
-            </p>
-          </div>
-        </div>
-        <div className="my-3 h-1 w-[100%] bg-gray-400"></div>
-        <div className="flex">
-          <div className="hidden  justify-start sm:flex">
-            <div className=" flex flex-col gap-2 text-lg md:text-xl">
+    <>
+      <Head>
+        <title>Profil</title>
+      </Head>
+      <div className="h-[calc(100vh-84px)] bg-slate-100">
+        <div className=" m-auto p-2 md:container md:p-24">
+          <div className="py-2 text-2xl font-semibold md:text-3xl">Profil</div>
+          <div className="sm:hidden">
+            <div className=" flex gap-2 text-lg md:text-xl">
               <p
                 onClick={() => setCurrentSetting(0)}
                 className={`${
@@ -108,13 +83,44 @@ const Profile = ({ dataArray, userLogged }) => {
                 Abmelden
               </p>
             </div>
-            <div className=" mx-5 hidden w-1 bg-gray-400 sm:block"></div>
           </div>
-          {currentSetting === 0 && <Orders data={orderDataArray} />}
-          {currentSetting === 1 && <ProfileInfo data={userData} />}
+          <div className="my-3 h-1 w-[100%] bg-gray-400"></div>
+          <div className="flex">
+            <div className="hidden  justify-start sm:flex">
+              <div className=" flex flex-col gap-2 text-lg md:text-xl">
+                <p
+                  onClick={() => setCurrentSetting(0)}
+                  className={`${
+                    currentSetting === 0 ? "bg-slate-200" : "hover:bg-slate-50"
+                  } cursor-pointer rounded-md p-2 `}
+                >
+                  Bestellungen
+                </p>
+                <p
+                  onClick={() => setCurrentSetting(1)}
+                  className={`${
+                    currentSetting === 1 ? "bg-slate-200" : "hover:bg-slate-50"
+                  } cursor-pointer rounded-md p-2`}
+                >
+                  Informationen
+                </p>
+                <p
+                  onClick={handleSignOut}
+                  className={`${
+                    currentSetting === 2 ? "bg-slate-200" : "hover:bg-slate-50"
+                  } cursor-pointer rounded-md p-2`}
+                >
+                  Abmelden
+                </p>
+              </div>
+              <div className=" mx-5 hidden w-1 bg-gray-400 sm:block"></div>
+            </div>
+            {currentSetting === 0 && <Orders data={orderDataArray} />}
+            {currentSetting === 1 && <ProfileInfo data={userData} />}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -4,12 +4,16 @@ import Newsletter from "../components/Newsletter";
 import Trends from "../components/Trends";
 import { client } from "../lib/client";
 import { useStateContext } from "../context/StateContext";
+import Head from "next/head";
 
 export default function Home({ products, categories, productsOffer }) {
   const { user } = useStateContext();
 
   return (
     <>
+      <Head>
+        <title>Electronics.</title>
+      </Head>
       <div className="bg-slate-200">
         <UpperBanner bannerData={productsOffer} />
       </div>
@@ -29,7 +33,7 @@ export default function Home({ products, categories, productsOffer }) {
 export const getServerSideProps = async () => {
   const query = '*[_type=="product" && isTrend == true]';
   const catQuery = '*[_type=="categories"]';
-  const offerQuery = '*[_type=="product"&& isSale == true][0]';
+  const offerQuery = '*[_type=="product"&& isSale == true][2]';
   const productsOffer = await client.fetch(offerQuery);
   const categories = await client.fetch(catQuery);
   const products = await client.fetch(query);

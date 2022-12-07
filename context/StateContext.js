@@ -98,7 +98,7 @@ const deleteItemFirebase = async(product)=>{
         let newCartItems = cartItems.filter(item=>item.uid !==product.uid)
         deleteItemFirebase(product)
         setCartItems(newCartItems)
-
+        toast.error("Produkt aus Warenkorb entfernt")
 
         setTotalPrice(prevPrice =>prevPrice - foundProduct.price*foundProduct.quantity)
         setTotalQty(prevqty=> prevqty-foundProduct.quantity)

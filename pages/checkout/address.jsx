@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useRouter } from "next/router";
 import { useStateContext } from "../../context/StateContext";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import Head from "next/head";
 
 const schema = yup.object().shape({
   firstName: yup.string().trim().required("Bitte gebe deine Email Adresse ein"),
@@ -52,6 +53,9 @@ const Address = () => {
 
   return (
     <>
+      <Head>
+        <title>Versanddetails</title>
+      </Head>
       {cartItems.length > 0 && user ? (
         <div className="min-h-[calc(100vh-84px)] bg-slate-100">
           <div className="container m-auto p-2 md:p-24">

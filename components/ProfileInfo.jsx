@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../lib/firebase";
 import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const schema = yup.object().shape({
   oldPassword: yup
@@ -27,10 +28,13 @@ const schema = yup.object().shape({
 
 const ProfileInfo = ({ data }) => {
   const [shownData, setShownData] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -39,6 +43,7 @@ const ProfileInfo = ({ data }) => {
   const submitForm = async (formData) => {
     const { password, oldPassword } = formData;
     const user = auth.currentUser;
+    setLoading(true);
     const credential = EmailAuthProvider.credential(
       auth.currentUser.email,
       oldPassword
@@ -53,8 +58,15 @@ const ProfileInfo = ({ data }) => {
       }
       toast.success("Passwort aktualisiert");
       setShownData(0);
+      setLoading(false);
+      reset({
+        oldPassword: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (error) {
-      toast.error("Etwas ist schiefgelaufen");
+      setLoading(false);
+      toast.error("Etwas ist schiefgelaufen. Überprüfe deine Eingaben");
     }
   };
 
@@ -121,17 +133,18 @@ const ProfileInfo = ({ data }) => {
                 name="confirmPassword"
                 id="confirmPassword"
                 className={` ${
-                  errors?.confirmPassword
-                    ? "border-2 border-red-500"
-                    : "border-2 border-gray-500"
+                  errors?.confirmPassword ? "border-2 border-red-500" : ""
                 } `}
               />
             </div>
             <p className="text-sm text-red-600">
               {errors?.confirmPassword && "Dein Password muss übereinstimmen"}
             </p>
-            <button className="rounded-md bg-slate-300 p-2 hover:bg-slate-200">
-              Passwort ändern
+            <button
+              disabled={loading}
+              className="rounded-md bg-slate-300 p-2 hover:bg-slate-200 disabled:text-gray-400 disabled:hover:bg-slate-300"
+            >
+              {loading ? "Bitte warten" : "Passwort ändern"}
             </button>
           </form>
         </div>

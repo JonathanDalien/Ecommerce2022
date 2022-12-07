@@ -7,6 +7,7 @@ import { urlFor } from "../../lib/client";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../../lib/firebase";
+import Head from "next/head";
 const { v4: uuidv4 } = require("uuid");
 
 const schema = yup.object().shape({
@@ -57,6 +58,9 @@ const Summary = () => {
 
   return (
     <>
+      <Head>
+        <title>Lieferübersicht</title>
+      </Head>
       {cartItems.length > 0 && user && shippingData ? (
         <div className="min-h-[calc(100vh-84px)] bg-slate-100">
           <div className="container m-auto p-10">

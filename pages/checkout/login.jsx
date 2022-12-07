@@ -7,6 +7,8 @@ import { auth } from "../../lib/firebase";
 import { useRouter } from "next/router";
 import { useStateContext } from "../../context/StateContext";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import Head from "next/head";
+import Link from "next/link";
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -49,6 +51,9 @@ const CheckoutLogin = () => {
 
   return (
     <>
+      <Head>
+        <title>Anmelden</title>
+      </Head>
       {cartItems.length > 0 && (
         <div className="flex min-h-[calc(100vh-84px)] items-center justify-center bg-slate-200 lg:p-14">
           <div className="registerform h-[90%] w-[100%] rounded-xl bg-slate-200 py-8 lg:w-[40%] lg:bg-white lg:px-16">
@@ -101,6 +106,13 @@ const CheckoutLogin = () => {
                 {loading ? "Bitte warten" : "Anmelden"}
               </button>
             </form>
+            <p className="my-2 text-gray-600">
+              Noch kein Account? Klicke{" "}
+              <Link className="text-blue-600" href="/register">
+                Hier
+              </Link>{" "}
+              um dich zu registrieren.
+            </p>
           </div>
         </div>
       )}
