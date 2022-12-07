@@ -187,6 +187,13 @@ const Summary = () => {
                       </p>
                     </div>
                     <p className="text-sm">inkl. MwSt.</p>
+                    <div className="text-red-400">
+                      <p>Da Developmenphase diese Paypaldaten nutzen:</p>
+                      <p className="font-semibold">
+                        Email: Electronicsse@gmail.com
+                      </p>
+                      <p className="font-semibold">Passwort: ElectronicsSe</p>
+                    </div>
                     <PayPalScriptProvider options={initialOptions}>
                       <PayPalButtons
                         createOrder={(data, actions) => {
