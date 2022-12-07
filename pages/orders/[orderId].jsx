@@ -39,7 +39,7 @@ const OrderDetails = ({ data }) => {
 
   return (
     <div className="min-h-[calc(100vh-84px)] bg-slate-100">
-      <div className="m-auto gap-10 p-5 md:p-10 lg:container lg:p-20">
+      <div className="m-auto gap-10 p-5 md:p-10 lg:container lg:flex lg:p-20">
         <div className="left flex flex-[1] flex-col gap-4">
           <h1 className=" my-4 hidden text-3xl font-bold md:block">
             Electronics.
@@ -98,12 +98,12 @@ const OrderDetails = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="right my-4 flex flex-[1] flex-col rounded-md border-2 border-gray-300 p-10">
+        <div className="right my-4 flex flex-[1] flex-col rounded-md border-2 border-gray-300 p-2">
           <div className="flex h-[50vh] flex-col gap-5 overflow-auto">
             {data.items.map((item, i) => {
               return (
-                <div className="flex items-center justify-between ">
-                  <div className="flex items-center gap-4 ">
+                <div key={i} className="flex items-center  ">
+                  <div className="flex flex-[2] items-center gap-2 ">
                     <img
                       className="h-[100px] w-[100px] rounded-md border-[1px] border-gray-400 object-contain mix-blend-multiply"
                       src={urlFor(
@@ -119,7 +119,7 @@ const OrderDetails = ({ data }) => {
                       <p className="text-gray-400">Anzahl: {item.quantity}</p>
                     </div>
                   </div>
-                  <div>
+                  <div className="flex flex-[1] justify-center">
                     <p>{item.price.toFixed(2)} €</p>
                   </div>
                 </div>

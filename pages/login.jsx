@@ -44,7 +44,6 @@ const Login = () => {
       router.push("/");
     } catch (error) {
       setLoading(false);
-      console.log(error);
       setError("Überprüfe deine Email & dein Passwort!");
     }
   };

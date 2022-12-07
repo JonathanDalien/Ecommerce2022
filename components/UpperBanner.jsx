@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const UpperBanner = ({ bannerData }) => {
   const { onAdd } = useStateContext();
-  console.log(bannerData);
   return (
     <div className=" container relative m-auto min-h-[60vh] py-10">
       <div className="">

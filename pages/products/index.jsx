@@ -108,10 +108,9 @@ const Products = ({ productsAllProducts }) => {
     }
   };
 
-  console.log(currentCat);
   return (
-    <div className="min-h-[calc(100vh-84px)] bg-slate-100 p-8">
-      <div className="container m-auto p-2 lg:py-16">
+    <div className="min-h-[calc(100vh-84px)] bg-slate-100 md:p-8">
+      <div className="container m-auto md:p-2 lg:py-16">
         <div className="flex flex-col items-center justify-between py-2 lg:flex-row">
           <h1 className="py-4 text-4xl font-bold ">{CatText}</h1>
           <div className="flex gap-2">
@@ -203,7 +202,7 @@ const Products = ({ productsAllProducts }) => {
             </button>
           </div>
         </div>
-        <div className="flex flex-wrap justify-center gap-14">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-14">
           {product?.map((product) => {
             return (
               <Product key={product.productId.current} product={product} />

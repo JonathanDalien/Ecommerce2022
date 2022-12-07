@@ -8,8 +8,8 @@ const Orders = ({ data }) => {
         <p className="p-2 text-2xl"></p>
         {data?.length ? (
           <div className="">
-            {data?.map((item) => {
-              return <OrderItem orderInfo={item} />;
+            {data?.map((item, i) => {
+              return <OrderItem key={i} orderInfo={item} />;
             })}
           </div>
         ) : (

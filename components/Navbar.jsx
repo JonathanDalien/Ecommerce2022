@@ -40,9 +40,6 @@ const Navbar = () => {
     setShowMenu,
   } = useStateContext();
 
-  console.log(user?.isAnonymous);
-  console.log(user);
-
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);

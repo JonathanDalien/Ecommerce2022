@@ -38,7 +38,6 @@ export const StateContext = ({ children }) => {
             const cartRef = collection(db, "shoppingCarts", user.uid, "CartItems");
             const cart = await getDocs(cartRef)
             const cartArray =cart.docs.map((doc)=>({...doc.data()}))
-            console.log(cartArray.length)
             if(cartArray.length){
                 setCartItems(cart.docs.map((doc)=>({...doc.data()})))
             }

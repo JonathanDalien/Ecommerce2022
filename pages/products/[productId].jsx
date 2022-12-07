@@ -10,8 +10,6 @@ import "swiper/css/pagination";
 const DetailPage = ({ product }) => {
   const { onAdd, cartItems, showCart } = useStateContext();
 
-  console.log(product);
-
   const [selectedColorId, setSelectedColorId] = useState(0);
   const [selectedPreviewId, setSelectedPreviewId] = useState(0);
   const [color, setColor] = useState(

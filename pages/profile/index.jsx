@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import OrderItem from "../../components/OrderItem";
 import { useStateContext } from "../../context/StateContext";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
@@ -17,8 +16,6 @@ const Profile = ({ dataArray, userLogged }) => {
   const [userDataArray, setUserDataArray] = useState([]);
 
   const [userData] = userDataArray;
-
-  console.log(userData);
 
   useEffect(() => {
     const queryfunc = async () => {
@@ -84,7 +81,7 @@ const Profile = ({ dataArray, userLogged }) => {
         </div>
         <div className="my-3 h-1 w-[100%] bg-gray-400"></div>
         <div className="flex">
-          <div className="hidden flex-[0.5] justify-start sm:flex">
+          <div className="hidden  justify-start sm:flex">
             <div className=" flex flex-col gap-2 text-lg md:text-xl">
               <p
                 onClick={() => setCurrentSetting(0)}

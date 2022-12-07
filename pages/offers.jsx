@@ -37,7 +37,6 @@ const Offers = ({ productsAllProducts }) => {
     }
   };
 
-  console.log(currentCat);
   return (
     <div className="min-h-[calc(100vh-84px)] bg-slate-100 p-8">
       <div className="container m-auto py-16">

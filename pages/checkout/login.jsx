@@ -43,7 +43,6 @@ const CheckoutLogin = () => {
       router.push("/checkout/address");
     } catch (error) {
       setLoading(false);
-      console.log(error);
       setError("Überprüfe deine Email & dein Passwort!");
     }
   };

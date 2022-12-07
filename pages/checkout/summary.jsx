@@ -1,6 +1,4 @@
-import React, { use, useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import { useStateContext } from "../../context/StateContext";
@@ -124,7 +122,10 @@ const Summary = () => {
                   <div className="checkout-details flex flex-col gap-3">
                     {cartItems.map((item, i) => {
                       return (
-                        <div className="border-gray flex items-center gap-10 rounded-xl border-[1px] p-10">
+                        <div
+                          key={i}
+                          className="border-gray flex items-center gap-10 rounded-xl border-[1px] p-10"
+                        >
                           <div className="product_img">
                             <img
                               className="h-[150px] w-[150px] object-contain mix-blend-multiply"
@@ -287,13 +288,12 @@ const Summary = () => {
                                   statusCode: 0,
                                   userId: user.uid,
                                 })
-                                  .then(router.push(`/orders/${order.id}`))
                                   .then(setCartItems([]))
                                   .then(setTotalQty(0))
-                                  .then(emptyCartFireBase());
-                              } catch (error) {
-                                console.log(error);
-                              }
+                                  .then(emptyCartFireBase())
+                                  .then(router.prefetch(`/orders/${order.id}`))
+                                  .then(router.push(`/orders/${order.id}`));
+                              } catch (error) {}
                             });
                         }}
                         onCancel={() => {}}

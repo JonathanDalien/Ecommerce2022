@@ -59,7 +59,7 @@ const Address = () => {
             <div className="">
               <form
                 onSubmit={handleSubmit(submitForm)}
-                className="flex-col justify-center  gap-10 py-10"
+                className="flex flex-col justify-center gap-10  py-10 lg:flex-row"
                 action=""
               >
                 <div className="flex w-[100%] flex-col">

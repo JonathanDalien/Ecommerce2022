@@ -18,23 +18,23 @@ const Footer = () => {
           <div className="flex md:gap-28">
             <div className="flex flex-col">
               <h1 className="pb-3 text-3xl font-semibold">Produkte</h1>
-              <Link href="products" className="my-3 hover:underline">
+              <Link href="/products" className="my-3 hover:underline">
                 Alle Produkte
               </Link>
               <Link
-                href="products?category=Kopfhörer"
+                href="/products?category=Kopfhörer"
                 className="my-3 hover:underline"
               >
                 Kopföhrer
               </Link>
               <Link
-                href="products?category=Lautsprecher"
+                href="/products?category=Lautsprecher"
                 className="my-3 hover:underline"
               >
                 Lautsprecher
               </Link>
               <Link
-                href="products?category=Kabellose In‑Ear"
+                href="/products?category=Kabellose In‑Ear"
                 className="my-3 hover:underline"
               >
                 In-Ear
@@ -42,23 +42,23 @@ const Footer = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="pb-3 text-3xl font-semibold">Service</h1>
-              <Link href="" className="my-3 hover:underline">
+              <Link href="/offers" className="my-3 hover:underline">
                 Angebote
               </Link>
-              <Link href="#beliebt" className="my-3 hover:underline">
+              <Link href="/#beliebt" className="my-3 hover:underline">
                 Beliebte Produkte
               </Link>
             </div>
             <div className="flex flex-col">
               <h1 className="pb-3 text-3xl font-semibold">Über Uns</h1>
-              <Link href="" className="my-3 hover:underline">
+              <Link href="/aboutus" className="my-3 hover:underline">
                 Über uns
               </Link>
-              <Link href="" className="my-3 hover:underline">
+              <Link href="/support" className="my-3 hover:underline">
                 Support
               </Link>
               <Link
-                href="aboutus/widerrufsrecht"
+                href="/aboutus/widerrufsrecht"
                 className="my-3 hover:underline"
               >
                 Widerrufsrecht

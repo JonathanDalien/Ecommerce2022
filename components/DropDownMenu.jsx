@@ -111,7 +111,6 @@ export default function UnstyledMenuSimple() {
 
   const createHandleMenuClick = (menuItem) => {
     return () => {
-      console.log(`Clicked on ${menuItem}`);
       close();
     };
   };

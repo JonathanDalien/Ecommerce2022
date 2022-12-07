@@ -20,7 +20,7 @@ const Newsletter = () => {
             <input
               type="email"
               placeholder="Gib deine Email ein"
-              className="w-[100%] border-0  py-4  indent-4 focus:outline-none md:w-[500px] lg:w-[600px] "
+              className="w-[100%] border-0 py-4 indent-4 focus:outline-none md:w-[500px] lg:w-[600px] "
             ></input>
             <button
               type="submit"
