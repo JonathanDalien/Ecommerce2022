@@ -14,16 +14,16 @@ export default function Home({ products, categories, productsOffer }) {
       <Head>
         <title>Electronics.</title>
       </Head>
-      <div className="bg-slate-200">
+      <div className="bg-slate-200 ">
         <UpperBanner bannerData={productsOffer} />
       </div>
-      <div className="bg-slate-100">
+      <div className="bg-slate-100 ">
         <Categories categories={categories} />
       </div>
-      <div id="beliebt" className="bg-slate-200">
+      <div id="beliebt" className="text-blac bg-slate-200 ">
         <Trends products={products} />
       </div>
-      <div className="bg-slate-200 ">
+      <div className="bg-slate-200 text-black">
         <Newsletter />
       </div>
     </>

@@ -52,6 +52,7 @@ const Profile = ({ dataArray, userLogged }) => {
     <>
       <Head>
         <title>Profil</title>
+        <meta name="color-scheme" content="only" />
       </Head>
       <div className="h-[calc(100vh-84px)] bg-slate-100">
         <div className=" m-auto p-2 md:container md:p-24">

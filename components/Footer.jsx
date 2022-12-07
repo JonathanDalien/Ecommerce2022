@@ -5,7 +5,7 @@ import { AiFillGithub } from "react-icons/ai";
 const Footer = () => {
   return (
     <>
-      <div className="hidden p-16 pb-0 lg:block">
+      <div className="hidden p-16 pb-0  text-red-500 lg:block">
         <div className="flex pb-4">
           <div className="flex flex-1 flex-col">
             <h1 className="pb-4 text-7xl font-bold">Electronics.</h1>

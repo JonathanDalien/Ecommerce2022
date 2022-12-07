@@ -33,19 +33,19 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="border-b-gray2-200 w-screen border-b-2 bg-slate-100 px-3 drop-shadow-md lg:px-6 ">
+      <div className="w-screen border-b-2 border-b-gray-200 bg-slate-100 px-3 text-black drop-shadow-md  lg:px-6 ">
         <div className="flex items-center justify-between py-5 ">
           <div className="flex flex-[1] items-center justify-start gap-2">
             <div
               className="cursor-pointer space-y-2 lg:hidden"
               onClick={() => setShowMenu(true)}
             >
-              <div className="h-0.5 w-8 bg-gray-600"></div>
-              <div className="h-0.5 w-8 bg-gray-600"></div>
-              <div className="h-0.5 w-8 bg-gray-600"></div>
+              <div className="h-0.5 w-8 bg-gray-600 "></div>
+              <div className="h-0.5 w-8 bg-gray-600 "></div>
+              <div className="h-0.5 w-8 bg-gray-600 "></div>
             </div>
             <Link href="/">
-              <h1 className=" text-3xl font-bold ">Electronics.</h1>
+              <h1 className=" text-3xl font-bold  ">Electronics.</h1>
             </Link>
           </div>
           <div className="hidden flex-[3] items-center justify-center gap-12 lg:flex ">
