@@ -4,21 +4,9 @@ import { AiOutlineShopping } from "react-icons/ai";
 import DropDownMenu from "./DropDownMenu";
 import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
-import { AnimatePresence, motion } from "framer-motion";
 import { signOut } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { useRouter } from "next/router";
-import {
-  collection,
-  doc,
-  getDoc,
-  onSnapshot,
-  query,
-  QuerySnapshot,
-  setDoc,
-  Timestamp,
-  where,
-} from "firebase/firestore";
 import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
   const [showProducts, setShowProducts] = useState(false);
@@ -31,10 +19,7 @@ const Navbar = () => {
     showCart,
     setShowCart,
     user,
-    setTotalQty,
-    setCartItems,
-    cartItems,
-    anonymousUser,
+
     setUser,
     showMenu,
     setShowMenu,
@@ -46,22 +31,18 @@ const Navbar = () => {
     router.push("/login");
   };
 
-  const handleonClickMenu = () => {
-    setShowMenu(true);
-  };
-
   return (
     <>
       <div className="border-b-gray2-200 w-screen border-b-2 bg-slate-100 px-3 drop-shadow-md lg:px-6 ">
         <div className="flex items-center justify-between py-5 ">
           <div className="flex flex-[1] items-center justify-start gap-2">
             <div
-              class="cursor-pointer space-y-2 lg:hidden"
+              className="cursor-pointer space-y-2 lg:hidden"
               onClick={() => setShowMenu(true)}
             >
-              <div class="h-0.5 w-8 bg-gray-600"></div>
-              <div class="h-0.5 w-8 bg-gray-600"></div>
-              <div class="h-0.5 w-8 bg-gray-600"></div>
+              <div className="h-0.5 w-8 bg-gray-600"></div>
+              <div className="h-0.5 w-8 bg-gray-600"></div>
+              <div className="h-0.5 w-8 bg-gray-600"></div>
             </div>
             <Link href="/">
               <h1 className=" text-3xl font-bold ">Electronics.</h1>
