@@ -70,7 +70,7 @@ const Login = () => {
               {errors?.email?.message}
             </p>
             <input
-              className={`rounded-lg ${
+              className={`rounded-lg bg-white ${
                 errors?.email
                   ? "border-2 border-red-500"
                   : "border-2 border-gray-500"
@@ -85,7 +85,7 @@ const Login = () => {
               {errors?.password?.message}
             </p>
             <input
-              className={`rounded-lg ${
+              className={`rounded-lg bg-white ${
                 errors?.password
                   ? "border-2 border-red-500"
                   : "border-2 border-gray-500"

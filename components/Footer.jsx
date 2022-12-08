@@ -5,7 +5,7 @@ import { AiFillGithub } from "react-icons/ai";
 const Footer = () => {
   return (
     <>
-      <div className="hidden p-16 pb-0  text-red-500 lg:block">
+      <div className="pb-0-500 hidden p-16 lg:block">
         <div className="flex pb-4">
           <div className="flex flex-1 flex-col">
             <h1 className="pb-4 text-7xl font-bold">Electronics.</h1>
@@ -87,7 +87,7 @@ const Footer = () => {
         </div>
       </div>
       <div className=" p-4 pb-0 lg:hidden">
-        <div className="flex flex-col items-center justify-center pb-8">
+        <div className="flex flex-col  justify-center pb-8">
           <div className="flex flex-col items-center pb-8">
             <h1 className="pb-4 text-7xl font-bold">Electronics.</h1>
             <p>
@@ -96,7 +96,7 @@ const Footer = () => {
               Driven by Values
             </p>
           </div>
-          <div className="flex items-start justify-center gap-4 md:gap-28">
+          <div className="flex items-start justify-between md:gap-28">
             <div className="flex flex-col">
               <h1 className="pb-3 text-2xl font-semibold md:text-3xl">
                 Produkte
