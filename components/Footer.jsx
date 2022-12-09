@@ -70,13 +70,13 @@ const Footer = () => {
           </div>
         </div>
         <hr />
-        <div className="flex flex-col items-center justify-center gap-2 py-8">
+        <div className="flex flex-col items-center justify-center gap-2 ">
           <p>2022 Jonathan Dalien - All rights reserved</p>
           <p className="text-4xl">
             <Link
               legacyBehavior
               className=""
-              href="https://github.com/JonathanDalien/Ecommerce-Headphones"
+              href="https://github.com/JonathanDalien/Ecommerce2022"
               passHref
             >
               <a>
@@ -166,7 +166,7 @@ const Footer = () => {
             <Link
               legacyBehavior
               className=""
-              href="https://github.com/JonathanDalien/Ecommerce-Headphones"
+              href="https://github.com/JonathanDalien/Ecommerce2022"
               passHref
             >
               <a>
