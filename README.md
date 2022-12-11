@@ -1,6 +1,6 @@
 ### Ecommerce Page Project
 This Ecommerce Project was built using the frontend library Reactjs / Next.js. 
-For the backend I used Sanity, mainly to store all the products that are avaiable for purchase.
+For the backend I used Sanity, mainly to store all the products that are available for purchase.
 Register & Login functionality was managed with Firebase.
 Orders, Users, and Shopping carts are stored on Firebase.
 
