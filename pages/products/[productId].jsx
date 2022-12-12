@@ -34,7 +34,7 @@ const DetailPage = ({ product }) => {
       </Head>
       <div className="min-h-[calc(100vh-86px)] bg-slate-200">
         <div className="flex flex-col lg:gap-10">
-          <div className="flex flex-col items-center justify-around p-10 lg:flex-row lg:p-24">
+          <div className="flex flex-col items-center justify-around  lg:flex-row lg:p-24">
             <div className="picture relative hidden h-[200px] w-[200px] items-center justify-center rounded-xl sm:flex md:h-[350px] md:w-[350px] lg:h-[500px] lg:w-[500px]">
               {product.isSale && (
                 <p className="absolute -top-10 right-0 hidden rounded-lg bg-gradient-to-r from-red-600 to-orange-400 p-2 text-lg font-semibold text-white lg:block ">
@@ -53,7 +53,7 @@ const DetailPage = ({ product }) => {
             <Swiper
               modules={[Pagination]}
               pagination
-              className="picture relative flex h-[300px] w-[300px] items-center justify-center mix-blend-multiply sm:hidden md:h-[350px] md:w-[350px] lg:h-[500px] lg:w-[500px]"
+              className="picture relative flex h-[300px] w-[100%] items-center justify-center mix-blend-multiply sm:hidden md:h-[350px] md:w-[350px] lg:h-[500px] lg:w-[500px]"
             >
               {product.colorImages[selectedColorId].allImage.map((image, i) => {
                 return (
@@ -125,7 +125,7 @@ const DetailPage = ({ product }) => {
                 <button
                   onClick={() => onAdd(product, color)}
                   type="button"
-                  className="rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-105 hover:from-cyan-500 hover:to-purple-300"
+                  className="mb-4 rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-105 hover:from-cyan-500 hover:to-purple-300"
                 >
                   In den Einkaufswagen
                 </button>

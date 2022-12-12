@@ -39,7 +39,10 @@ export const StateContext = ({ children }) => {
             const cart = await getDocs(cartRef)
             const cartArray =cart.docs.map((doc)=>({...doc.data()}))
             if(cartArray.length){
-                setCartItems(cart.docs.map((doc)=>({...doc.data()})))
+                if(oldCart.length){
+                    toast.error("Achtung! Warenkorb wurde aus alter Sitzung wiederhergestellt")
+                }
+                setCartItems([...cartArray])
             }
             if(!cartArray.length){
             setCartItems([...oldCart])

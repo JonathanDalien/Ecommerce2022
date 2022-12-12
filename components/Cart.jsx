@@ -124,15 +124,12 @@ const Cart = ({ isvisible }) => {
                     <p>{totalPrice.toFixed(2)}€</p>
                   </div>
                 </div>
-                <div className="buttons flex items-center justify-around p-4">
+                <div className="buttons flex p-4">
                   <button
                     onClick={handleCheckout}
-                    className="rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-[1.01] hover:from-cyan-500 hover:to-purple-300 disabled:from-cyan-500 disabled:to-purple-300"
+                    className="flex-[1] rounded-md  bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-[1.01] hover:from-cyan-500 hover:to-purple-300 disabled:from-cyan-500 disabled:to-purple-300"
                   >
                     Zum Warenkorb
-                  </button>
-                  <button className="rounded-md bg-gradient-to-r from-yellow-600 to-orange-400 p-4 px-6 font-semibold text-white transition-all hover:scale-[1.01] hover:from-yellow-500 hover:to-orange-300 disabled:from-cyan-500 disabled:to-purple-300">
-                    Paypal Express Checkout
                   </button>
                 </div>
               </>
