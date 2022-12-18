@@ -20,7 +20,7 @@ const UpperBanner = ({ bannerData }) => {
       <div className="flex items-center justify-around">
         <div className=" hidden w-[30vw] md:block">
           <p className=" 3xl:text-8xl hidden break-words bg-gradient-to-r from-cyan-600 to-purple-400 bg-clip-text pb-4 text-2xl font-bold text-transparent md:block md:text-5xl lg:text-6xl xl:text-7xl ">
-            Im Angebott
+            Im Angebot
           </p>
           <p className=" hidden text-xl font-bold sm:text-3xl md:block md:text-5xl lg:text-6xl">
             {bannerData.name}
