@@ -121,9 +121,9 @@ const DetailPage = ({ product }) => {
                   );
                 })}
               </div>
-              {product.isStock ? (
+              {product.colorImages[selectedColorId].productQuantity > 12 ? (
                 <button
-                  onClick={() => onAdd(product, color)}
+                  onClick={() => onAdd(product, color, selectedColorId)}
                   type="button"
                   className="mb-4 rounded-md bg-gradient-to-r from-cyan-600 to-purple-400 p-4 px-6 font-semibold text-white transition-all hover:scale-105 hover:from-cyan-500 hover:to-purple-300"
                 >
@@ -133,7 +133,7 @@ const DetailPage = ({ product }) => {
                 <button
                   disabled
                   type="button"
-                  className="rounded-md bg-gradient-to-r  from-cyan-500 to-purple-300 p-4 px-6 font-semibold text-white"
+                  className="mb-4 rounded-md bg-gradient-to-r  from-cyan-500 to-purple-300 p-4 px-6 font-semibold text-white"
                 >
                   Ausverkauft
                 </button>
