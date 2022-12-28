@@ -48,17 +48,14 @@ const Summary = () => {
   } = useStateContext();
 
   async function mutate(mutations) {
-    const result = await fetch(
-      `https://mf5rnynb.api.sanity.io/v2022-11-13/data/mutate/production`,
-      {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer skKmErU0s7fEWZbVSeFctwcee3ShTWn44PiGrhBD2ULPYJB8IS0eHmFQjqckTTxQmZPC0OKxzOPX7C5uodgbYxtPAIaCNTOF1kQZJKaxvOoArCGPED1jGZX2tWsJT9Tksw89k3UOxfwhueeugvZgABexlNr87hIikns76WECEhOtD6yf2reI`,
-        },
-        body: JSON.stringify(mutations),
-        method: "POST",
-      }
-    );
+    const result = await fetch(`${process.env.NEXT_PUBLIC_SANITY_URL}`, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_TOKEN}`,
+      },
+      body: JSON.stringify(mutations),
+      method: "POST",
+    });
 
     const json = await result.json();
     return json;
