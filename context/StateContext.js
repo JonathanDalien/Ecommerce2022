@@ -72,11 +72,11 @@ const emptyCartFireBase = async()=>{
     })
 }
 
-    const addCartFireBase =async(product, color, selectedColorId, totalprice, quantity)=>{
+    const addCartFireBase =async(product, color, totalprice, quantity)=>{
         if(user){
         const cartRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
             await setDoc(cartRef, {
-                ...product, chosenColor: color, quantity: quantity || 1, totalPrice: totalprice || product.price, uid: product._id+color, selectedColorId 
+                ...product, chosenColor: color, quantity: quantity || 1, totalPrice: totalprice || product.price, uid: product._id+color
               })}
     }
 
@@ -107,7 +107,7 @@ const deleteItemFirebase = async(product)=>{
         setTotalQty(prevqty=> prevqty-foundProduct.quantity)
     }
 
-    const onAdd = (product, color, selectedColorId) => {
+    const onAdd = (product, color) => {
         const checkProductInCart = cartItems.find((item) => item._id === product._id && item.chosenColor === color);
         setTotalQty((prevqty) => prevqty + 1);
         toast.success("Produkt wurde deinem Einkaufswagen hinzugefügt!")
@@ -123,9 +123,9 @@ const deleteItemFirebase = async(product)=>{
             setCartItems(updatedCartItems)
             updateCartFireBase(product, color)
         } else {
-            addCartFireBase(product, color, selectedColorId)
+            addCartFireBase(product, color)
             setCartItems((prevItems) => {
-                return [...prevItems, { ...product, quantity: 1, chosenColor: color, uid: product._id+color, totalPrice:product.price, selectedColorId}]
+                return [...prevItems, { ...product, quantity: 1, chosenColor: color, uid: product._id+color, totalPrice:product.price}]
             })
         }
 
