@@ -31,6 +31,11 @@ export default {
                             hotspot: true,
                         }
                     },
+                    {    
+                        name: "productQuantity",
+                        title: "Product Quantity",
+                        type: "number"
+                        },
             ]}],
         },
         {    
@@ -84,6 +89,11 @@ export default {
             type: "number"
         },
         {    
+            name: "stockQantity",
+            title: "Stock Quantity",
+            type: "number"
+        },
+        {    
             name: "isSale",
             title: "Sale",
             type: "boolean"
@@ -101,6 +111,7 @@ export default {
     ],
     initialValue: {
         isTrend: false,
-        isStock: true
+        isStock: true,
+        stockQuantity: 20
       }
 }
