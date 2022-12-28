@@ -11,7 +11,7 @@ function Mutate() {
       {
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_SANITY_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_TOKEN}`,
         },
         body: JSON.stringify(mutations),
         method: "POST",
@@ -58,7 +58,9 @@ function Mutate() {
         CartItems
       </button>
       <button
-        onClick={() => console.log("Bearer " + process.env.NEXT_SANITY_TOKEN)}
+        onClick={() =>
+          console.log("Bearer " + process.env.NEXT_PUBLIC_SANITY_TOKEN)
+        }
         className="button m-6 bg-slate-400 py-2 px-3"
       >
         CartItems
