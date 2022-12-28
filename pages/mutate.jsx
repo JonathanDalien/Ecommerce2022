@@ -6,17 +6,14 @@ function Mutate() {
   const { cartItems } = useStateContext();
 
   async function mutate(mutations) {
-    const result = await fetch(
-      `https://mf5rnynb.api.sanity.io/v2022-11-13/data/mutate/production`,
-      {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_TOKEN}`,
-        },
-        body: JSON.stringify(mutations),
-        method: "POST",
-      }
-    );
+    const result = await fetch(`${process.env.NEXT_PUBLIC_SANITY_URL}`, {
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_TOKEN}`,
+      },
+      body: JSON.stringify(mutations),
+      method: "POST",
+    });
 
     const json = await result.json();
     return json;
