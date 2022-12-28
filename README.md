@@ -1,12 +1,13 @@
 ### Ecommerce Page Project
-This Ecommerce Project was built using the frontend library Reactjs / Next.js. 
+
+This Ecommerce Project was built using the frontend library Reactjs / Next.js.
 For the backend I used Sanity, mainly to store all the products that are available for purchase. Tailwind CSS was used for styling.
 Register & Login functionality was managed with Firebase.
 Orders, Users, and Shopping carts are stored on Firebase.
 
 ### [Click here for preview](https://electronicsecommerce.vercel.app/)
 
-**This Page is only for showcase & and not a real app!**
+**This Page is only for showcase & not a real app!**
 
 ![store-pic](https://i.imgur.com/hf0PvSC.jpg)
 
