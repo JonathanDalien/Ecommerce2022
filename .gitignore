@@ -3,7 +3,6 @@
 # dependencies
 node_modules
 .env
-pages/mutate.jsx
 git-filter-repo
 /.pnp
 .pnp.js
