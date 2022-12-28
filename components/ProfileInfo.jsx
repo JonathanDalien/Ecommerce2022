@@ -82,7 +82,7 @@ const ProfileInfo = ({ data }) => {
               </div>
               <div className="flex flex-col text-xl lg:flex-row">
                 <p className="flex-[1] font-semibold">Deine E-Mail:</p>
-                <p className="flex-[2]">{data?.email.toLowerCase()}</p>
+                <p className="flex-[2]">{data?.email}</p>
               </div>
               <div className="flex flex-col text-xl lg:flex-row">
                 <p className="flex-[1] font-semibold">Deine Telefonnummer:</p>

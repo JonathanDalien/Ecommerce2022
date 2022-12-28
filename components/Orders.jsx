@@ -13,7 +13,7 @@ const Orders = ({ data }) => {
             })}
           </div>
         ) : (
-          <p>Du hast bisher keine Bestellung getätigt.</p>
+          <p>Du hast bisher keine Bestellung getätigt</p>
         )}
       </div>
     </div>
