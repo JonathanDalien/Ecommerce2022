@@ -12,6 +12,8 @@ const Products = ({ productsAllProducts }) => {
   const [CatText, setCatText] = useState("Alle Produkte");
   const [sort, setSort] = useState("alphAsc");
   const [product, setProduct] = useState();
+  const [filteredProduct, setFilteredProduct] = useState();
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if (router.query.category == null) {
@@ -109,14 +111,18 @@ const Products = ({ productsAllProducts }) => {
     }
   };
 
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <>
       <Head>
         <title>Produkte</title>
       </Head>
-      <div className="min-h-[calc(100vh-84px)] bg-slate-100 md:p-8">
+      <div className="min-h-[calc(100vh-84px)] bg-slate-100  md:p-8">
         <div className="container m-auto md:p-2 lg:py-16">
-          <div className="flex flex-col items-center justify-between py-2 lg:flex-row">
+          <div className="flex flex-col items-center justify-between p-4 py-2 md:p-0 lg:flex-row">
             <h1 className="py-4 text-4xl font-bold ">{CatText}</h1>
             <div className="flex gap-2">
               <button
@@ -162,7 +168,7 @@ const Products = ({ productsAllProducts }) => {
             </div>
           </div>
           <hr className="py-1" />
-          <div className="flex flex-col items-center justify-between pb-4 lg:flex-row">
+          <div className="flex flex-col items-center justify-between p-4 pb-4 md:p-0 lg:flex-row">
             <p className="font-bold">Sortieren nach</p>
             <div className="flex gap-10 py-2">
               <button
@@ -207,12 +213,53 @@ const Products = ({ productsAllProducts }) => {
               </button>
             </div>
           </div>
+          <div className="mb-10 flex items-center justify-center gap-4 px-4 md:px-0 lg:justify-start">
+            <label className="text-xl" htmlFor="search">
+              Suche:{" "}
+            </label>
+            <input
+              id="search"
+              className="w-96 rounded-md border-2 border-slate-400 bg-slate-200"
+              type="text"
+              onChange={handleSearch}
+              value={searchValue}
+            />
+          </div>
           <div className="flex flex-wrap justify-center gap-2 md:gap-14">
-            {product?.map((product) => {
-              return (
-                <Product key={product.productId.current} product={product} />
-              );
-            })}
+            {product
+              ?.filter((products) => {
+                if (searchValue == "") {
+                  return { ...products };
+                }
+                return products.name
+                  .toLowerCase()
+                  .includes(searchValue.toLowerCase());
+              })
+              .map((product) => {
+                return (
+                  <Product key={product.productId.current} product={product} />
+                );
+              }).length ? (
+              product
+                ?.filter((products) => {
+                  if (searchValue == "") {
+                    return { ...products };
+                  }
+                  return products.name
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase());
+                })
+                .map((product) => {
+                  return (
+                    <Product
+                      key={product.productId.current}
+                      product={product}
+                    />
+                  );
+                })
+            ) : (
+              <h1>Leider keine Suchergebnisse</h1>
+            )}
           </div>
         </div>
       </div>
