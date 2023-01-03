@@ -144,7 +144,7 @@ const Footer = () => {
               <Link href="" className="my-3 hover:underline">
                 Über uns
               </Link>
-              <Link href="" className="my-3 hover:underline">
+              <Link href="/support" className="my-3 hover:underline">
                 Support
               </Link>
               <Link

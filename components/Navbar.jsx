@@ -9,9 +9,6 @@ import { auth, db } from "../lib/firebase";
 import { useRouter } from "next/router";
 import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
-  const [showProducts, setShowProducts] = useState(false);
-  const [dataBaseCart, setDataBaseCart] = useState([]);
-
   const router = useRouter();
 
   const {
@@ -55,12 +52,7 @@ const Navbar = () => {
             >
               <p>Angebote</p>
             </Link>
-            <Link
-              href="/products"
-              className="flex items-center"
-              onMouseEnter={() => setShowProducts(true)}
-              onMouseLeave={() => setShowProducts(false)}
-            >
+            <Link href="/products" className="flex items-center">
               <DropDownMenu />
             </Link>
             <Link
