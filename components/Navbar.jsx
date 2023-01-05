@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-screen border-b-2 border-b-gray-200 bg-slate-100 px-3 text-black drop-shadow-md  lg:px-6 ">
+      <div className="border-b-2 border-b-gray-200 bg-slate-100 px-3 text-black drop-shadow-md  lg:px-6 ">
         <div className="flex items-center justify-between py-5 ">
           <div className="flex flex-[1] items-center justify-start gap-2">
             <div

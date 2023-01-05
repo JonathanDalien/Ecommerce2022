@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     <Loading />
   ) : (
     <>
-      <div className="layout overflow-hidden scroll-smooth dark:text-black">
+      <div className="scroll-smooth dark:text-black">
         <Head>
           <title>Electronics.</title>
           <meta name="color-scheme" content="only" />

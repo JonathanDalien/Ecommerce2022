@@ -1,4 +1,4 @@
-import { UpperBanner } from "../components";
+import UpperBanner from "../components/UpperBanner";
 import Categories from "../components/Categories";
 import Newsletter from "../components/Newsletter";
 import Trends from "../components/Trends";
