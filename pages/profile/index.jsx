@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useStateContext } from "../../context/StateContext";
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { auth, db } from "../../lib/firebase";
 import Orders from "../../components/Orders";
 import ProfileInfo from "../../components/ProfileInfo";
@@ -15,17 +22,14 @@ const Profile = ({ dataArray, userLogged }) => {
   const { setUser, setPageLoading, user } = useStateContext();
   const [orderDataArray, setOrderDataArray] = useState();
   const [userDataArray, setUserDataArray] = useState([]);
-
-  const [userData] = userDataArray;
+  const [userData, setUserData] = useState();
 
   useEffect(() => {
     const queryfunc = async () => {
-      const userRef = collection(db, "users");
-      const q2 = query(userRef, where("uid", "==", user.uid));
-      const userSnapshot = await getDocs(q2);
-      setUserDataArray(userSnapshot.docs.map((doc) => ({ ...doc.data() })));
+      const userRef = doc(db, "users", user.uid);
+      const userSnapshot = await getDoc(userRef);
+      setUserData(userSnapshot.data());
     };
-
     queryfunc();
 
     if (userDataArray) setPageLoading(false);

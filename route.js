@@ -37,7 +37,7 @@ export function protectedProfile(Component){
         const {user} = useStateContext()
 
         if(!user){
-            router.replace("/")
+            router.replace("/login")
             return <div className="bg-slate-200 h-[calc(100vh-84px)]"></div>
         }else {
             return <Component {...props}/>

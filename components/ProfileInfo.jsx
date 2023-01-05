@@ -78,7 +78,7 @@ const ProfileInfo = ({ data }) => {
             <div className="sm:0 flex flex-col gap-2 p-5">
               <div className="flex flex-col text-xl lg:flex-row">
                 <p className="flex-[1] font-semibold">Dein Name:</p>
-                <p className="flex-[2]">{`${data.firstName} ${data.lastName}`}</p>
+                <p className="flex-[2]">{`${data?.firstName} ${data?.lastName}`}</p>
               </div>
               <div className="flex flex-col text-xl lg:flex-row">
                 <p className="flex-[1] font-semibold">Deine E-Mail:</p>

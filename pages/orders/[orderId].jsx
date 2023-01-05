@@ -3,7 +3,9 @@ import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { urlFor } from "../../lib/client";
-import { db } from "../../lib/firebase";
+import { auth, db } from "../../lib/firebase";
+import nookies from "nookies";
+import { firebaseAdmin } from "../../lib/firebaseadmin";
 
 const OrderDetails = ({ data }) => {
   const [orderStatus, setOrderStatus] = useState({});
@@ -157,21 +159,46 @@ const OrderDetails = ({ data }) => {
 export default OrderDetails;
 
 export const getServerSideProps = async (context) => {
-  const { params } = context;
-  const { orderId } = params;
+  try {
+    const cookies = nookies.get(context);
 
-  const orderRef = collection(db, "orders");
-  const q = query(orderRef, where("orderId", "==", orderId));
-  const querySnapshot = await getDocs(q);
-  const dataArray = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
-  const [data] = dataArray;
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
 
-  if (!data) {
+    const { params } = context;
+    const { orderId } = params;
+
+    const orderRef = collection(db, "orders");
+    const q = query(orderRef, where("orderId", "==", orderId));
+    const querySnapshot = await getDocs(q);
+    const dataArray = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+    const [data] = dataArray;
+
+    if (data.userId != token.uid) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/",
+        },
+      };
+    }
+
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+    };
+  }
+
+  if (!data || token.uid != null || data.userId != token.uid) {
     return {
       notFound: true,
     };
+  } else {
   }
-  return {
-    props: { data },
-  };
 };

@@ -1,11 +1,10 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import React from "react";
-import {onAuthStateChanged, signInAnonymously} from "firebase/auth"
+import {onAuthStateChanged, onIdTokenChanged, signInAnonymously} from "firebase/auth"
 import {auth, db} from "../lib/firebase"
 import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc, updateDoc, increment, deleteDoc } from "firebase/firestore";
-import { async } from "@firebase/util";
-import { isResSent } from "next/dist/shared/lib/utils";
 import toast from "react-hot-toast";
+import nookies from "nookies"
 
 const { v4: uuidv4 } = require('uuid')
 
@@ -25,9 +24,17 @@ export const StateContext = ({ children }) => {
 
 
     useEffect(()=>{
-         onAuthStateChanged(auth, user =>{
+         onIdTokenChanged(auth, async user =>{
+            if(!user){
+                setUser(null);
+                nookies.set(undefined, "token", "",{path: "/"});
+                setPageLoading(false)
+            }else{
+            const token = await user.getIdToken();
             setUser(user)
+            nookies.set(undefined, "token", token, {path: "/"})
             setPageLoading(false)
+        }
         })
     },[user])
 
