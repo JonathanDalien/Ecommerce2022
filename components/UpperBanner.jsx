@@ -1,12 +1,8 @@
 import React from "react";
-import img from "../assets/headphones_c_2.webp";
-import Image from "next/image";
 import { urlFor } from "../lib/client";
-import { useStateContext } from "../context/StateContext";
 import Link from "next/link";
 
 const UpperBanner = ({ bannerData }) => {
-  const { onAdd } = useStateContext();
   return (
     <div className=" container relative m-auto min-h-[60vh] py-10">
       <div className="">
