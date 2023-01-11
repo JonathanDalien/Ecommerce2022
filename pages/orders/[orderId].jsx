@@ -1,9 +1,9 @@
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { urlFor } from "../../lib/client";
-import { auth, db } from "../../lib/firebase";
+import { db } from "../../lib/firebase";
 import nookies from "nookies";
 import { firebaseAdmin } from "../../lib/firebaseadmin";
 
@@ -193,12 +193,5 @@ export const getServerSideProps = async (context) => {
         destination: "/",
       },
     };
-  }
-
-  if (!data || token.uid != null || data.userId != token.uid) {
-    return {
-      notFound: true,
-    };
-  } else {
   }
 };

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import Category from "./Category";
-import imgHeadphone from "../assets/headphones.webp";
 
 const Categories = ({ categories }) => {
   return (

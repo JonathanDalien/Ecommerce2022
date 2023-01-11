@@ -48,7 +48,7 @@ const Cart = ({ isvisible }) => {
                 className=" flex cursor-pointer items-center gap-3 text-xl"
                 onClick={() => setShowCart(false)}
               >
-                <AiOutlineLeft /> Dein Einkaufwagen ist leer
+                <AiOutlineLeft /> Dein Einkaufswagen ist leer
               </div>
             )}
             {cartItems.length > 0 && (

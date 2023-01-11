@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineLeft } from "react-icons/ai";
 import { useStateContext } from "../context/StateContext";
-import { urlFor } from "../lib/client";
 import useMountTransition from "../hooks/useMountTransition ";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { signOut } from "firebase/auth";
 import { auth } from "../lib/firebase";
 
 const HamburgerMenu = ({ isvisible }) => {
-  const {
-    totalPrice,
-    totalQty,
-    cartItems,
-    setShowCart,
-    onRemove,
-    user,
-    setShowMenu,
-  } = useStateContext();
+  const { user, setShowMenu } = useStateContext();
 
   const router = useRouter();
 

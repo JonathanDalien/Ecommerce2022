@@ -11,17 +11,16 @@ import {
 import { auth, db } from "../../lib/firebase";
 import Orders from "../../components/Orders";
 import ProfileInfo from "../../components/ProfileInfo";
-import { signOut, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-import { protectedProfile, withProtectedPublic } from "../../route";
+import { protectedProfile } from "../../route";
 import Head from "next/head";
 
-const Profile = ({ dataArray, userLogged }) => {
+const Profile = () => {
   const router = useRouter();
   const [currentSetting, setCurrentSetting] = useState(0);
   const { setUser, setPageLoading, user } = useStateContext();
   const [orderDataArray, setOrderDataArray] = useState();
-  const [userDataArray, setUserDataArray] = useState([]);
   const [userData, setUserData] = useState();
 
   useEffect(() => {
@@ -31,8 +30,6 @@ const Profile = ({ dataArray, userLogged }) => {
       setUserData(userSnapshot.data());
     };
     queryfunc();
-
-    if (userDataArray) setPageLoading(false);
   }, []);
 
   useEffect(() => {

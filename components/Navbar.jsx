@@ -1,11 +1,11 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiOutlineShopping } from "react-icons/ai";
 import DropDownMenu from "./DropDownMenu";
 import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
 import { signOut } from "firebase/auth";
-import { auth, db } from "../lib/firebase";
+import { auth } from "../lib/firebase";
 import { useRouter } from "next/router";
 import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
@@ -93,7 +93,7 @@ const Navbar = () => {
                   className="rounded-md  p-2 text-xl transition-all hover:bg-slate-50"
                   href="/login"
                 >
-                  Login
+                  Anmelden
                 </Link>
                 <Link
                   className="rounded-md p-2 text-xl  transition-all hover:bg-slate-50"

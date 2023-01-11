@@ -3,12 +3,9 @@ import Categories from "../components/Categories";
 import Newsletter from "../components/Newsletter";
 import Trends from "../components/Trends";
 import { client } from "../lib/client";
-import { useStateContext } from "../context/StateContext";
 import Head from "next/head";
 
 export default function Home({ products, categories, productsOffer }) {
-  const { user } = useStateContext();
-
   return (
     <>
       <Head>

@@ -6,8 +6,6 @@ import { collection, doc, getDocs, query, setDoc, Timestamp, where, addDoc, upda
 import toast from "react-hot-toast";
 import nookies from "nookies"
 
-const { v4: uuidv4 } = require('uuid')
-
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
@@ -79,7 +77,7 @@ const emptyCartFireBase = async()=>{
     })
 }
 
-    const addCartFireBase =async(product, color, selectedColorId, totalprice, quantity)=>{
+const addCartFireBase =async(product, color, selectedColorId, totalprice, quantity)=>{
         if(user){
         const cartRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
             await setDoc(cartRef, {
@@ -87,7 +85,7 @@ const emptyCartFireBase = async()=>{
               })}
     }
 
-    const updateCartFireBase = async(product, color)=>{
+const updateCartFireBase = async(product, color)=>{
         if(user){
         const productRef = doc(db, "shoppingCarts", user.uid, "CartItems", product._id+color)
 
@@ -150,20 +148,3 @@ const deleteItemFirebase = async(product)=>{
     )
 }
 export const useStateContext = () => useContext(Context)
-
-
-
-export const getServerSideProps = async (context) => {
-    const { params, res, req } = context;
-    const { productId } = params;
-    const productQuery = `*[_type=="product" && productId.current == '${productId}'][0]`;
-    const product = await client.fetch(productQuery);
-    if (!product) {
-      return {
-        notFound: true,
-      };
-    }
-    return {
-      props: { product },
-    };
-  };

@@ -1,8 +1,21 @@
+import { signOut } from "firebase/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { AiFillGithub } from "react-icons/ai";
+import { useStateContext } from "../context/StateContext";
+import { auth } from "../lib/firebase";
 
 const Footer = () => {
+  const { user, setUser } = useStateContext();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+    router.push("/login");
+  };
+
   return (
     <>
       <div className="hidden p-16 pb-10 lg:block">
@@ -63,9 +76,31 @@ const Footer = () => {
               >
                 Widerrufsrecht
               </Link>
-              <Link href="" className="my-3 hover:underline">
-                Logout
-              </Link>
+              {user ? (
+                <>
+                  <button
+                    onClick={handleSignOut}
+                    className="my-3 text-start hover:underline"
+                  >
+                    Abmelden
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => router.push("/login")}
+                    className="my-3 text-start hover:underline"
+                  >
+                    Anmelden
+                  </button>
+                  <button
+                    onClick={() => router.push("/register")}
+                    className="my-3 text-start hover:underline"
+                  >
+                    Registrieren
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -153,9 +188,22 @@ const Footer = () => {
               >
                 Widerrufsrecht
               </Link>
-              <Link href="" className="my-3 hover:underline">
-                Logout
-              </Link>
+              {user ? (
+                <>
+                  <button className="my-3 text-start hover:underline">
+                    Abmelden
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className="my-3 text-start hover:underline">
+                    Anmelden
+                  </button>
+                  <button className="my-3 text-start hover:underline">
+                    Registrieren
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

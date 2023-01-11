@@ -5,7 +5,7 @@ import { useStateContext } from "../../context/StateContext";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { urlFor } from "../../lib/client";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../lib/firebase";
 import Head from "next/head";
 const { v4: uuidv4 } = require("uuid");

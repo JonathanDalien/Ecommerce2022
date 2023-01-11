@@ -12,7 +12,6 @@ const Products = ({ productsAllProducts }) => {
   const [CatText, setCatText] = useState("Alle Produkte");
   const [sort, setSort] = useState("alphAsc");
   const [product, setProduct] = useState();
-  const [filteredProduct, setFilteredProduct] = useState();
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {

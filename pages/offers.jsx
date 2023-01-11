@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Product from "../components/Product";
 import { client } from "../lib/client";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 const Offers = ({ productsAllProducts }) => {
-  const router = useRouter();
-  const [currentCat, setCurrentCat] = useState(
-    router.query.category || "Alle Produkte"
-  );
-  const [CatText, setCatText] = useState("Alle Produkte");
   const [sort, setSort] = useState("alphAsc");
   const [product, setProduct] = useState(productsAllProducts);
 

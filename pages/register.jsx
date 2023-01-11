@@ -4,11 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import * as yup from "yup";
 import { auth, db } from "../lib/firebase";
-import { addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { Timestamp } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
-import { withProtectedPublic, withPublic } from "../route";
+import { withPublic } from "../route";
 import Head from "next/head";
 import Link from "next/link";
 

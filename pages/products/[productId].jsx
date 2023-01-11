@@ -3,7 +3,7 @@ import { client, urlFor } from "../../lib/client";
 import { useStateContext } from "../../context/StateContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { EffectFade, Pagination } from "swiper";
+import { Pagination } from "swiper";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import Head from "next/head";

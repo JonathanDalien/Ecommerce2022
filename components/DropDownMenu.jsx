@@ -7,7 +7,6 @@ import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
 import Link from "next/link";
 import { Divider } from "@mui/material";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 
 const blue = {
   100: "#DAECFF",
